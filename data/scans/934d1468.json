@@ -1,0 +1,84 @@
+{
+  "url": "https://clean-master.hr/",
+  "domain": "clean-master.hr",
+  "scan_timestamp": "2026-10-31 00:59:53",
+  "ssl_valid": true,
+  "ssl_details": "Valjan SSL certifikat (Istjece: Dec 29 22:19:22 2026 GMT)",
+  "privacy_policy_found": true,
+  "privacy_policy_url": "https://clean-master.hr/#politikaprivatnosti",
+  "cookie_banner_found": true,
+  "cookies_detected": [],
+  "trackers_detected": [
+    "Google Analytics / GTM"
+  ],
+  "forms_detected": [
+    {
+      "action": "",
+      "has_email_or_user_data": true,
+      "has_consent_checkbox": false,
+      "input_count": 7
+    },
+    {
+      "action": "",
+      "has_email_or_user_data": true,
+      "has_consent_checkbox": false,
+      "input_count": 7
+    },
+    {
+      "action": "",
+      "has_email_or_user_data": true,
+      "has_consent_checkbox": false,
+      "input_count": 7
+    }
+  ],
+  "security_headers": {
+    "Content-Security-Policy": "frame-ancestors https://carrd.com;",
+    "Strict-Transport-Security": null,
+    "X-Content-Type-Options": null,
+    "X-Frame-Options": "deny",
+    "Referrer-Policy": null
+  },
+  "risks": [
+    {
+      "id": "RISK_TRANSFER_01",
+      "category": "Prijenos u Trece Zemlje",
+      "title": "Moguci prijenos podataka pružateljima u SAD (Google Analytics / GTM)",
+      "description": "Korištenje servisa poput Google Analytics ili Meta Pixel može ukljucivati slanje IP adresa i identifikatora izvan EGP-a.",
+      "risk_level": "Srednji",
+      "impact": "Srednji",
+      "probability": "Srednja",
+      "gdpr_article": "Poglavlje V (Clanci 44.-49. - Prijenos osobnih podataka trecim zemljama)",
+      "recommendation": "Osigurajte sklopljen DPA (Data Processing Addendum) s ugovornim klauzulama (SCCs) i provjerite uskladenost s EU-US Data Privacy Frameworkom."
+    },
+    {
+      "id": "RISK_FORM_01",
+      "category": "Obrasci i Prikupljanje Podataka",
+      "title": "Obrasci za unos podataka nemaju jasnu poveznicu na privolu/pravila",
+      "description": "Pronadeno je 3 obrazaca koji prikupljaju osobne podatke (npr. e-mail) bez jasne izjave o privoli ili linka na Pravila privatnosti.",
+      "risk_level": "Srednji",
+      "impact": "Srednji",
+      "probability": "Srednja",
+      "gdpr_article": "Clanak 6. (Zakonitost obrade) i Clanak 13.",
+      "recommendation": "Dodajte kratku napomenu ispod obrasca s poveznicom na Pravila privatnosti i po potrebi checkbox za specificne privole (npr. newsletter)."
+    },
+    {
+      "id": "RISK_HEADER_01",
+      "category": "Sigurnost i Enkripcija",
+      "title": "Nedostaje HSTS zaglavlje (Strict-Transport-Security)",
+      "description": "Preglednici nisu prisiljeni uvijek koristiti HTTPS vezu, što otvara mogucnost SSL stripping napada.",
+      "risk_level": "Nizak",
+      "impact": "Srednji",
+      "probability": "Niska",
+      "gdpr_article": "Clanak 32. (Tehnicke i organizacijske mjere zaštite)",
+      "recommendation": "Omogucite HTTP Strict Transport Security (HSTS) na web poslužitelju s minimalnim trajanjem od 6 mjeseci."
+    }
+  ],
+  "compliance_score": 75,
+  "summary": {
+    "high": 0,
+    "medium": 2,
+    "low": 1,
+    "total": 3
+  },
+  "scan_id": "934d1468"
+}

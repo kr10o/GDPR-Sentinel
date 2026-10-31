@@ -1,0 +1,32 @@
+[
+  {
+    "id": "EDPB-2026-03",
+    "date": "2026-09-15",
+    "source": "EDPB (European Data Protection Board)",
+    "title": "Nove smjernice o korištenju generativne AI u kontekstu GDPR-a (03/2026)",
+    "summary": "Europski odbor za zaštitu podataka objavio je ažurirane smjernice vezane uz pravne osnove za treniranje LLM modela na javno dostupnim podacima ispitanika i prava na brisanje.",
+    "impact_level": "Visok",
+    "url": "https://edpb.europa.eu",
+    "read": false
+  },
+  {
+    "id": "EDPB-2026-02",
+    "date": "2026-06-20",
+    "source": "Nacionalno Nadzorno Tijelo / EDPB",
+    "title": "Presuda o valjanosti 'Consent or Pay' (Privola ili Plati) modela",
+    "summary": "Pojašnjeni uvjeti pod kojima velike online platforme smiju ponuditi pretplatu kao alternativu pracenju i profiliranju u marketinške svrhe.",
+    "impact_level": "Srednji",
+    "url": "https://edpb.europa.eu",
+    "read": false
+  },
+  {
+    "id": "AZOP-2026-01",
+    "date": "2026-03-10",
+    "source": "AZOP (Agencija za zaštitu osobnih podataka)",
+    "title": "Preporuke za web trgovce o transparentnosti uvjeta kolacica",
+    "summary": "Nadzorna tijela pokrecu uskladenu akciju provjere 'Reject All' (Odbij sve) gumba na cookie bannerima unutar EGP-a.",
+    "impact_level": "Visok",
+    "url": "https://azop.hr",
+    "read": true
+  }
+]

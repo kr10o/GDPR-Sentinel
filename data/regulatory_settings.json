@@ -1,0 +1,6 @@
+{
+  "check_frequency": "weekly",
+  "notification_type": "both",
+  "notification_email": "jakupekkrsto@gmail.com",
+  "is_active": true
+}

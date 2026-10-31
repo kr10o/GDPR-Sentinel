@@ -1,0 +1,27 @@
+{
+  "name": "CLEAN MASTER j.d.o.o.",
+  "id_number": " 72956868801",
+  "address": "Trg svetog Florijana 11, 48312 Rasinja (blizu Koprivnice)",
+  "email": "info@clean-master.hr",
+  "phone": " +385 99 876 9012",
+  "website": "https://clean-master.hr/",
+  "dpo_name": "Siniša Jakopanec",
+  "dpo_email": "info@clean-master.hr",
+  "data_purposes": [
+    "Pružanje usluga i ispunjenje ugovornih obveza",
+    "Korisnicka podrška i komunikacija",
+    "Izdavanje racuna i zakonsko knjigovodstvo",
+    "Poboljšanje funkcionalnosti web stranice i statistika"
+  ],
+  "data_retention_period": "5 godina sukladno važecim racunovodstvenim propisima",
+  "third_parties": [
+    "Hosting pružatelji (EU serveri)",
+    "Racunovodstveni servis",
+    "Analiticki servisi uz privolu korisnika"
+  ],
+  "security_measures": [
+    "TLS/SSL enkripcija u prijenosu podataka",
+    "Redovite sigurnosne kopije (backup)",
+    "Kontrola pristupa i autentifikacija s više faktora"
+  ]
+}
