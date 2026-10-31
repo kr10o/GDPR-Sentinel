@@ -1,0 +1,955 @@
+{
+  "id": "85ccd743",
+  "scan_id": "85ccd743",
+  "domain": "lov-ribolov.hr",
+  "url": "https://lov-ribolov.hr/",
+  "timestamp": "2026-10-31T04:17:04.402234+00:00",
+  "scan_date": "2026-10-31 05:17:12",
+  "duration_seconds": 8.14,
+  "status": "completed",
+  "pages_scanned_count": 9,
+  "crawled_pages": [
+    {
+      "url": "https://lov-ribolov.hr/",
+      "status_code": 200,
+      "title": "Ribolovni pribor i oprema za lov - Trgovina ribolovnom i lovačkom opremom - Lov i Ribolov Bjelovar",
+      "cookies_set": 5,
+      "forms_count": 3,
+      "depth": 0
+    },
+    {
+      "url": "https://lov-ribolov.hr/uvjeti/poslovanje/izjava-o-sigurnosti-online-placanja",
+      "status_code": 200,
+      "title": "Izjava o sigurnosti online plaćanja | Lov i Ribolov",
+      "cookies_set": 3,
+      "forms_count": 3,
+      "depth": 1
+    },
+    {
+      "url": "https://lov-ribolov.hr/uvjeti/poslovanje/dostava",
+      "status_code": 200,
+      "title": "Dostava | Lov i Ribolov",
+      "cookies_set": 3,
+      "forms_count": 3,
+      "depth": 1
+    },
+    {
+      "url": "https://lov-ribolov.hr/uvjeti/poslovanje/reklamacije",
+      "status_code": 200,
+      "title": "Reklamacije | Lov i Ribolov",
+      "cookies_set": 3,
+      "forms_count": 3,
+      "depth": 1
+    },
+    {
+      "url": "https://lov-ribolov.hr/hrvatska",
+      "status_code": 200,
+      "title": "Lov i Ribolov Hrvatska\n\n\n\n | Lov i Ribolov",
+      "cookies_set": 4,
+      "forms_count": 4,
+      "depth": 1
+    },
+    {
+      "url": "https://lov-ribolov.hr/uvjeti/poslovanje/uvjeti-koristenja",
+      "status_code": 200,
+      "title": "Uvjeti korištenja | Lov i Ribolov",
+      "cookies_set": 3,
+      "forms_count": 3,
+      "depth": 1
+    },
+    {
+      "url": "https://lov-ribolov.hr/uvjeti/poslovanje/uvjeti-prodaje",
+      "status_code": 200,
+      "title": "Uvjeti prodaje | Lov i Ribolov",
+      "cookies_set": 3,
+      "forms_count": 3,
+      "depth": 1
+    },
+    {
+      "url": "https://lov-ribolov.hr/uvjeti/poslovanje/odgovornost-za-materijalne-nedostatke",
+      "status_code": 200,
+      "title": "Odgovornost za materijalne nedostatke | Lov i Ribolov",
+      "cookies_set": 3,
+      "forms_count": 3,
+      "depth": 1
+    },
+    {
+      "url": "https://lov-ribolov.hr/uvjeti/poslovanje/izjava-o-ogranicenju-odgovornosti",
+      "status_code": 200,
+      "title": "Izjava o ograničenju odgovornosti | Lov i Ribolov",
+      "cookies_set": 3,
+      "forms_count": 3,
+      "depth": 1
+    }
+  ],
+  "score": 12,
+  "compliance_score": 12,
+  "risk_level": "CRITICAL",
+  "https": true,
+  "ssl_valid": true,
+  "http_to_https_redirect": true,
+  "has_cookie_banner": false,
+  "has_privacy_policy": true,
+  "has_cookie_policy": true,
+  "has_terms_of_service": true,
+  "has_dpo_contact": false,
+  "legal_pages": {
+    "privacy_policy": "https://lov-ribolov.hr/uvjeti/poslovanje/izjava-o-privatnosti",
+    "cookie_policy": "https://lov-ribolov.hr/uvjeti/poslovanje/kolacici-cookies",
+    "terms_of_service": "https://lov-ribolov.hr/uvjeti/poslovanje/dostava",
+    "dpa_imprint_contact": "https://lov-ribolov.hr/hrvatska"
+  },
+  "cmp_details": {
+    "has_cookie_banner": false,
+    "detected_cmp_platforms": [],
+    "google_consent_mode_v2": false,
+    "iab_tcf_v2_detected": false,
+    "has_accept_button": false,
+    "has_equal_reject_button": false,
+    "dark_pattern_suspected": false
+  },
+  "network_and_tls": {
+    "domain": "lov-ribolov.hr",
+    "ip_address": "138.199.141.215",
+    "reverse_dns": "server.cloud-wmdhosting.com",
+    "is_eu_ip_heuristic": true,
+    "ssl_valid": true,
+    "ssl_issuer": "Let's Encrypt",
+    "ssl_subject": "lov-ribolov.hr",
+    "ssl_version": "TLSv1.3",
+    "ssl_cipher": "TLS_AES_256_GCM_SHA384",
+    "ssl_expires": "2026-11-30T10:55:24+00:00",
+    "ssl_days_remaining": 30,
+    "errors": []
+  },
+  "security_headers": {
+    "headers": {
+      "strict-transport-security": {
+        "present": false,
+        "value": null,
+        "gdpr_relevance": "Čl. 32 GDPR - Enkripcija u prijenosu (HSTS)"
+      },
+      "content-security-policy": {
+        "present": false,
+        "value": null,
+        "gdpr_relevance": "Čl. 32 GDPR - Sprječavanje neovlaštenog ubacivanja skripti i curenja podataka (CSP)"
+      },
+      "x-content-type-options": {
+        "present": true,
+        "value": "nosniff",
+        "gdpr_relevance": "Zaštita od MIME-sniffing napada"
+      },
+      "x-frame-options": {
+        "present": true,
+        "value": "SAMEORIGIN",
+        "gdpr_relevance": "Zaštita od Clickjacking prijevara pri davanju privole"
+      },
+      "referrer-policy": {
+        "present": false,
+        "value": null,
+        "gdpr_relevance": "Sprječavanje curenja URL parametara trećim stranama"
+      },
+      "permissions-policy": {
+        "present": false,
+        "value": null,
+        "gdpr_relevance": "Ograničavanje pristupa kameri, mikrofonu i geolokaciji"
+      }
+    },
+    "present_count": 2,
+    "total_checked": 6,
+    "score_pct": 33.3
+  },
+  "cookies": [
+    {
+      "name": "exp_last_visit",
+      "domain": "lov-ribolov.hr",
+      "path": "/",
+      "secure": false,
+      "http_only": true,
+      "same_site": "None/Unset",
+      "expires": "Max-Age: 31536000s",
+      "category": "Neklasificirani",
+      "description": "Kolačić zahtijeva ručnu deklaraciju u Politici kolačića",
+      "allowed_pre_consent": false,
+      "set_before_consent": true,
+      "gdpr_compliant": false,
+      "found_on_url": "https://lov-ribolov.hr/"
+    },
+    {
+      "name": "exp_last_activity",
+      "domain": "lov-ribolov.hr",
+      "path": "/",
+      "secure": false,
+      "http_only": true,
+      "same_site": "None/Unset",
+      "expires": "Max-Age: 31536000s",
+      "category": "Neklasificirani",
+      "description": "Kolačić zahtijeva ručnu deklaraciju u Politici kolačića",
+      "allowed_pre_consent": false,
+      "set_before_consent": true,
+      "gdpr_compliant": false,
+      "found_on_url": "https://lov-ribolov.hr/"
+    },
+    {
+      "name": "exp_tracker",
+      "domain": "lov-ribolov.hr",
+      "path": "/",
+      "secure": false,
+      "http_only": true,
+      "same_site": "None/Unset",
+      "expires": null,
+      "category": "Neklasificirani",
+      "description": "Kolačić zahtijeva ručnu deklaraciju u Politici kolačića",
+      "allowed_pre_consent": false,
+      "set_before_consent": true,
+      "gdpr_compliant": false,
+      "found_on_url": "https://lov-ribolov.hr/"
+    },
+    {
+      "name": "exp_csrf_token",
+      "domain": "lov-ribolov.hr",
+      "path": "/",
+      "secure": false,
+      "http_only": true,
+      "same_site": "None/Unset",
+      "expires": "Max-Age: 0s",
+      "category": "Neklasificirani",
+      "description": "Kolačić zahtijeva ručnu deklaraciju u Politici kolačića",
+      "allowed_pre_consent": false,
+      "set_before_consent": true,
+      "gdpr_compliant": false,
+      "found_on_url": "https://lov-ribolov.hr/"
+    },
+    {
+      "name": "PHPSESSID",
+      "domain": "lov-ribolov.hr",
+      "path": "/",
+      "secure": false,
+      "http_only": true,
+      "same_site": "None/Unset",
+      "expires": null,
+      "category": "Nužni",
+      "description": "Standardni identifikator korisničke sesije poslužitelja",
+      "allowed_pre_consent": true,
+      "set_before_consent": true,
+      "gdpr_compliant": false,
+      "found_on_url": "https://lov-ribolov.hr/hrvatska"
+    }
+  ],
+  "cookies_count": 5,
+  "non_essential_preconsent_cookies": [
+    "exp_last_visit",
+    "exp_last_activity",
+    "exp_tracker",
+    "exp_csrf_token"
+  ],
+  "trackers": [
+    {
+      "id": "google_tag_manager",
+      "name": "Google Tag Manager (GTM)",
+      "provider": "Google Ireland Ltd. / Google LLC",
+      "country": "SAD (EU-US DPF)",
+      "category": "Upravljanje skriptama / Tag Manager",
+      "risk_level": "MEDIUM",
+      "gdpr_article": "Čl. 28, Čl. 44 GDPR",
+      "dpa_required": true,
+      "matched_evidence": [
+        "googletagmanager.com/gtm.js",
+        "googletagmanager.com/ns.html",
+        "GTM-N7NXCGJ"
+      ],
+      "found_on_pages": [
+        "https://lov-ribolov.hr/",
+        "https://lov-ribolov.hr/uvjeti/poslovanje/izjava-o-sigurnosti-online-placanja",
+        "https://lov-ribolov.hr/uvjeti/poslovanje/dostava",
+        "https://lov-ribolov.hr/uvjeti/poslovanje/reklamacije",
+        "https://lov-ribolov.hr/hrvatska",
+        "https://lov-ribolov.hr/uvjeti/poslovanje/uvjeti-koristenja",
+        "https://lov-ribolov.hr/uvjeti/poslovanje/uvjeti-prodaje",
+        "https://lov-ribolov.hr/uvjeti/poslovanje/odgovornost-za-materijalne-nedostatke",
+        "https://lov-ribolov.hr/uvjeti/poslovanje/izjava-o-ogranicenju-odgovornosti"
+      ]
+    },
+    {
+      "id": "google_fonts_external",
+      "name": "Google Fonts (Vanjski CDN)",
+      "provider": "Google LLC",
+      "country": "SAD",
+      "category": "Vanjski resursi / Fontovi",
+      "risk_level": "HIGH",
+      "gdpr_article": "Čl. 6(1)(f) / Presuda LG München (prijenos IP adrese bez privole)",
+      "dpa_required": false,
+      "matched_evidence": [
+        "fonts.googleapis.com"
+      ],
+      "found_on_pages": [
+        "https://lov-ribolov.hr/",
+        "https://lov-ribolov.hr/uvjeti/poslovanje/izjava-o-sigurnosti-online-placanja",
+        "https://lov-ribolov.hr/uvjeti/poslovanje/dostava",
+        "https://lov-ribolov.hr/uvjeti/poslovanje/reklamacije",
+        "https://lov-ribolov.hr/hrvatska",
+        "https://lov-ribolov.hr/uvjeti/poslovanje/uvjeti-koristenja",
+        "https://lov-ribolov.hr/uvjeti/poslovanje/uvjeti-prodaje",
+        "https://lov-ribolov.hr/uvjeti/poslovanje/odgovornost-za-materijalne-nedostatke",
+        "https://lov-ribolov.hr/uvjeti/poslovanje/izjava-o-ogranicenju-odgovornosti"
+      ]
+    },
+    {
+      "id": "microsoft_clarity",
+      "name": "Microsoft Clarity",
+      "provider": "Microsoft Corporation",
+      "country": "SAD (EU-US DPF)",
+      "category": "Bihevioralna analitika / Snimanje sesija",
+      "risk_level": "HIGH",
+      "gdpr_article": "Čl. 6(1)(a), Čl. 44 GDPR",
+      "dpa_required": true,
+      "matched_evidence": [
+        "clarity.ms/tag/"
+      ],
+      "found_on_pages": [
+        "https://lov-ribolov.hr/",
+        "https://lov-ribolov.hr/uvjeti/poslovanje/izjava-o-sigurnosti-online-placanja",
+        "https://lov-ribolov.hr/uvjeti/poslovanje/dostava",
+        "https://lov-ribolov.hr/uvjeti/poslovanje/reklamacije",
+        "https://lov-ribolov.hr/hrvatska",
+        "https://lov-ribolov.hr/uvjeti/poslovanje/uvjeti-koristenja",
+        "https://lov-ribolov.hr/uvjeti/poslovanje/uvjeti-prodaje",
+        "https://lov-ribolov.hr/uvjeti/poslovanje/odgovornost-za-materijalne-nedostatke",
+        "https://lov-ribolov.hr/uvjeti/poslovanje/izjava-o-ogranicenju-odgovornosti"
+      ]
+    }
+  ],
+  "trackers_detected": [
+    "Google Tag Manager (GTM)",
+    "Google Fonts (Vanjski CDN)",
+    "Microsoft Clarity"
+  ],
+  "third_party_domains": [
+    "fonts.googleapis.com",
+    "maps.googleapis.com",
+    "www.google.com",
+    "www.googletagmanager.com"
+  ],
+  "us_data_transfer_detected": true,
+  "dpa_processors_required": [
+    {
+      "name": "Google Tag Manager (GTM)",
+      "provider": "Google Ireland Ltd. / Google LLC",
+      "country": "SAD (EU-US DPF)"
+    },
+    {
+      "name": "Microsoft Clarity",
+      "provider": "Microsoft Corporation",
+      "country": "SAD (EU-US DPF)"
+    }
+  ],
+  "forms": [
+    {
+      "page_url": "https://lov-ribolov.hr/",
+      "action": "https://lov-ribolov.hr/",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "keywords (text)"
+      ],
+      "collects_pii": false,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "LOW",
+      "issues": []
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/",
+      "action": "https://lov-ribolov.hr/",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "keywords (text)"
+      ],
+      "collects_pii": false,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "LOW",
+      "issues": []
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/",
+      "action": "https://lov-ribolov.hr/",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "username (email)",
+        "password (password)"
+      ],
+      "collects_pii": true,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "MEDIUM",
+      "issues": [
+        "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR)."
+      ]
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/uvjeti/poslovanje/izjava-o-sigurnosti-online-placanja",
+      "action": "https://lov-ribolov.hr/",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "keywords (text)"
+      ],
+      "collects_pii": false,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "LOW",
+      "issues": []
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/uvjeti/poslovanje/izjava-o-sigurnosti-online-placanja",
+      "action": "https://lov-ribolov.hr/",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "keywords (text)"
+      ],
+      "collects_pii": false,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "LOW",
+      "issues": []
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/uvjeti/poslovanje/izjava-o-sigurnosti-online-placanja",
+      "action": "https://lov-ribolov.hr/uvjeti/poslovanje/izjava-o-sigurnosti-online-placanja",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "username (email)",
+        "password (password)"
+      ],
+      "collects_pii": true,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": true,
+      "risk_level": "LOW",
+      "issues": []
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/uvjeti/poslovanje/dostava",
+      "action": "https://lov-ribolov.hr/",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "keywords (text)"
+      ],
+      "collects_pii": false,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "LOW",
+      "issues": []
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/uvjeti/poslovanje/dostava",
+      "action": "https://lov-ribolov.hr/",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "keywords (text)"
+      ],
+      "collects_pii": false,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "LOW",
+      "issues": []
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/uvjeti/poslovanje/dostava",
+      "action": "https://lov-ribolov.hr/uvjeti/poslovanje/dostava",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "username (email)",
+        "password (password)"
+      ],
+      "collects_pii": true,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": true,
+      "risk_level": "LOW",
+      "issues": []
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/uvjeti/poslovanje/reklamacije",
+      "action": "https://lov-ribolov.hr/",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "keywords (text)"
+      ],
+      "collects_pii": false,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "LOW",
+      "issues": []
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/uvjeti/poslovanje/reklamacije",
+      "action": "https://lov-ribolov.hr/",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "keywords (text)"
+      ],
+      "collects_pii": false,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "LOW",
+      "issues": []
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/uvjeti/poslovanje/reklamacije",
+      "action": "https://lov-ribolov.hr/uvjeti/poslovanje/reklamacije",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "username (email)",
+        "password (password)"
+      ],
+      "collects_pii": true,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": true,
+      "risk_level": "LOW",
+      "issues": []
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/hrvatska",
+      "action": "https://lov-ribolov.hr/",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "keywords (text)"
+      ],
+      "collects_pii": false,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "LOW",
+      "issues": []
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/hrvatska",
+      "action": "https://lov-ribolov.hr/",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "keywords (text)"
+      ],
+      "collects_pii": false,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "LOW",
+      "issues": []
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/hrvatska",
+      "action": "https://lov-ribolov.hr/hrvatska",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "username (email)",
+        "password (password)"
+      ],
+      "collects_pii": true,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "MEDIUM",
+      "issues": [
+        "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR)."
+      ]
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/hrvatska",
+      "action": "https://lov-ribolov.hr/?ACT=41",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "ime (text)",
+        "email (email)",
+        "telefon (text)",
+        "tvrtka (text)",
+        "poruka (text)",
+        "snapxtr_bThHKEWKf (text)"
+      ],
+      "collects_pii": true,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "MEDIUM",
+      "issues": [
+        "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR)."
+      ]
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/uvjeti/poslovanje/uvjeti-koristenja",
+      "action": "https://lov-ribolov.hr/",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "keywords (text)"
+      ],
+      "collects_pii": false,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "LOW",
+      "issues": []
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/uvjeti/poslovanje/uvjeti-koristenja",
+      "action": "https://lov-ribolov.hr/",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "keywords (text)"
+      ],
+      "collects_pii": false,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "LOW",
+      "issues": []
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/uvjeti/poslovanje/uvjeti-koristenja",
+      "action": "https://lov-ribolov.hr/uvjeti/poslovanje/uvjeti-koristenja",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "username (email)",
+        "password (password)"
+      ],
+      "collects_pii": true,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": true,
+      "risk_level": "LOW",
+      "issues": []
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/uvjeti/poslovanje/uvjeti-prodaje",
+      "action": "https://lov-ribolov.hr/",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "keywords (text)"
+      ],
+      "collects_pii": false,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "LOW",
+      "issues": []
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/uvjeti/poslovanje/uvjeti-prodaje",
+      "action": "https://lov-ribolov.hr/",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "keywords (text)"
+      ],
+      "collects_pii": false,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "LOW",
+      "issues": []
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/uvjeti/poslovanje/uvjeti-prodaje",
+      "action": "https://lov-ribolov.hr/uvjeti/poslovanje/uvjeti-prodaje",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "username (email)",
+        "password (password)"
+      ],
+      "collects_pii": true,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": true,
+      "risk_level": "LOW",
+      "issues": []
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/uvjeti/poslovanje/odgovornost-za-materijalne-nedostatke",
+      "action": "https://lov-ribolov.hr/",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "keywords (text)"
+      ],
+      "collects_pii": false,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "LOW",
+      "issues": []
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/uvjeti/poslovanje/odgovornost-za-materijalne-nedostatke",
+      "action": "https://lov-ribolov.hr/",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "keywords (text)"
+      ],
+      "collects_pii": false,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "LOW",
+      "issues": []
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/uvjeti/poslovanje/odgovornost-za-materijalne-nedostatke",
+      "action": "https://lov-ribolov.hr/uvjeti/poslovanje/odgovornost-za-materijalne-nedostatke",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "username (email)",
+        "password (password)"
+      ],
+      "collects_pii": true,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": true,
+      "risk_level": "LOW",
+      "issues": []
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/uvjeti/poslovanje/izjava-o-ogranicenju-odgovornosti",
+      "action": "https://lov-ribolov.hr/",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "keywords (text)"
+      ],
+      "collects_pii": false,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "LOW",
+      "issues": []
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/uvjeti/poslovanje/izjava-o-ogranicenju-odgovornosti",
+      "action": "https://lov-ribolov.hr/",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "keywords (text)"
+      ],
+      "collects_pii": false,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "LOW",
+      "issues": []
+    },
+    {
+      "page_url": "https://lov-ribolov.hr/uvjeti/poslovanje/izjava-o-ogranicenju-odgovornosti",
+      "action": "https://lov-ribolov.hr/uvjeti/poslovanje/izjava-o-ogranicenju-odgovornosti",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "username (email)",
+        "password (password)"
+      ],
+      "collects_pii": true,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": true,
+      "risk_level": "LOW",
+      "issues": []
+    }
+  ],
+  "forms_count": 28,
+  "contact_and_dpo": {
+    "emails_found": [],
+    "dpo_Contact_detected": false,
+    "dpo_emails": [],
+    "oib_candidates": [
+      "69003887083"
+    ],
+    "mentions_azop_supervisory_authority": false,
+    "mentions_data_subject_rights": false
+  },
+  "headless_browser_used": false,
+  "local_storage_keys": [],
+  "issues": [
+    {
+      "severity": "CRITICAL",
+      "title": "Postavljanje analitičkih/marketinških kolačića prije privole (4)",
+      "description": "Kolačići (exp_last_visit, exp_last_activity, exp_tracker, exp_csrf_token) postavljeni su odmah pri učitavanju stranice bez prethodne privole korisnika.",
+      "gdpr_article": "Članak 6. st. 1. (a) i Članak 7. GDPR",
+      "penalty_points": "20"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Kolačići bez 'Secure' zastavice (5)",
+      "description": "Detektirani su kolačići koji se mogu prenositi preko nezaštićenog HTTP prijenosa.",
+      "gdpr_article": "Članak 32. GDPR",
+      "penalty_points": "6"
+    },
+    {
+      "severity": "CRITICAL",
+      "title": "Aktivni sustavi praćenja bez ikakvog Cookie Bannera (CMP)",
+      "description": "Detektirani su alati za praćenje (Google Fonts (Vanjski CDN), Microsoft Clarity), a stranica uopće nema mehanizam za prikupljanje privole.",
+      "gdpr_article": "Članak 6. i Članak 7. GDPR",
+      "penalty_points": "22"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Učitavanje Google Fonts s vanjskog poslužitelja (SAD)",
+      "description": "Stranica povlači fontove s fonts.googleapis.com / fonts.gstatic.com čime se IP adresa posjetitelja automatski šalje Googleu u SAD.",
+      "gdpr_article": "Članak 6. i Članak 44. GDPR (Presuda LG München Az. 3 O 17493/20)",
+      "penalty_points": "8"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Potrebni Ugovori o obradi podataka (DPA) za 2 izvršitelja",
+      "description": "Detektirani su vanjski izvršitelji obrade (Google Ireland Ltd. / Google LLC, Microsoft Corporation) koji zahtijevaju sklopljen DPA ugovor i unos u ROPA evidenciju.",
+      "gdpr_article": "Članak 28. i Članak 30. GDPR",
+      "penalty_points": "5"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Neusklađen web obrazac na https://lov-ribolov.hr/",
+      "description": "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR).",
+      "gdpr_article": "Članak 7., 13., 25. i 32. GDPR",
+      "penalty_points": "6"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Neusklađen web obrazac na https://lov-ribolov.hr/hrvatska",
+      "description": "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR).",
+      "gdpr_article": "Članak 7., 13., 25. i 32. GDPR",
+      "penalty_points": "6"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Neusklađen web obrazac na https://lov-ribolov.hr/hrvatska",
+      "description": "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR).",
+      "gdpr_article": "Članak 7., 13., 25. i 32. GDPR",
+      "penalty_points": "6"
+    },
+    {
+      "severity": "LOW",
+      "title": "Nedostaju sigurnosna HTTP zaglavlja (2/6)",
+      "description": "Poslužitelj ne šalje preporučena zaglavlja (CSP, HSTS, X-Frame-Options, Referrer-Policy).",
+      "gdpr_article": "Članak 32. GDPR (Tehničke i organizacijske mjere)",
+      "penalty_points": "5"
+    },
+    {
+      "severity": "LOW",
+      "title": "Nije detektirana uputa o pravu na pritužbu AZOP-u",
+      "description": "Na skeniranim stranicama nije pronađena referenca na Agenciju za zaštitu osobnih podataka (AZOP).",
+      "gdpr_article": "Članak 13. st. 2. (d) GDPR",
+      "penalty_points": "4"
+    }
+  ],
+  "findings": [
+    {
+      "severity": "CRITICAL",
+      "title": "Postavljanje analitičkih/marketinških kolačića prije privole (4)",
+      "description": "Kolačići (exp_last_visit, exp_last_activity, exp_tracker, exp_csrf_token) postavljeni su odmah pri učitavanju stranice bez prethodne privole korisnika.",
+      "gdpr_article": "Članak 6. st. 1. (a) i Članak 7. GDPR",
+      "penalty_points": "20"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Kolačići bez 'Secure' zastavice (5)",
+      "description": "Detektirani su kolačići koji se mogu prenositi preko nezaštićenog HTTP prijenosa.",
+      "gdpr_article": "Članak 32. GDPR",
+      "penalty_points": "6"
+    },
+    {
+      "severity": "CRITICAL",
+      "title": "Aktivni sustavi praćenja bez ikakvog Cookie Bannera (CMP)",
+      "description": "Detektirani su alati za praćenje (Google Fonts (Vanjski CDN), Microsoft Clarity), a stranica uopće nema mehanizam za prikupljanje privole.",
+      "gdpr_article": "Članak 6. i Članak 7. GDPR",
+      "penalty_points": "22"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Učitavanje Google Fonts s vanjskog poslužitelja (SAD)",
+      "description": "Stranica povlači fontove s fonts.googleapis.com / fonts.gstatic.com čime se IP adresa posjetitelja automatski šalje Googleu u SAD.",
+      "gdpr_article": "Članak 6. i Članak 44. GDPR (Presuda LG München Az. 3 O 17493/20)",
+      "penalty_points": "8"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Potrebni Ugovori o obradi podataka (DPA) za 2 izvršitelja",
+      "description": "Detektirani su vanjski izvršitelji obrade (Google Ireland Ltd. / Google LLC, Microsoft Corporation) koji zahtijevaju sklopljen DPA ugovor i unos u ROPA evidenciju.",
+      "gdpr_article": "Članak 28. i Članak 30. GDPR",
+      "penalty_points": "5"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Neusklađen web obrazac na https://lov-ribolov.hr/",
+      "description": "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR).",
+      "gdpr_article": "Članak 7., 13., 25. i 32. GDPR",
+      "penalty_points": "6"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Neusklađen web obrazac na https://lov-ribolov.hr/hrvatska",
+      "description": "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR).",
+      "gdpr_article": "Članak 7., 13., 25. i 32. GDPR",
+      "penalty_points": "6"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Neusklađen web obrazac na https://lov-ribolov.hr/hrvatska",
+      "description": "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR).",
+      "gdpr_article": "Članak 7., 13., 25. i 32. GDPR",
+      "penalty_points": "6"
+    },
+    {
+      "severity": "LOW",
+      "title": "Nedostaju sigurnosna HTTP zaglavlja (2/6)",
+      "description": "Poslužitelj ne šalje preporučena zaglavlja (CSP, HSTS, X-Frame-Options, Referrer-Policy).",
+      "gdpr_article": "Članak 32. GDPR (Tehničke i organizacijske mjere)",
+      "penalty_points": "5"
+    },
+    {
+      "severity": "LOW",
+      "title": "Nije detektirana uputa o pravu na pritužbu AZOP-u",
+      "description": "Na skeniranim stranicama nije pronađena referenca na Agenciju za zaštitu osobnih podataka (AZOP).",
+      "gdpr_article": "Članak 13. st. 2. (d) GDPR",
+      "penalty_points": "4"
+    }
+  ],
+  "recommendations": [
+    "Blokirajte sve nenužne kolačiće i skripte do trenutka kada korisnik aktivno klikne 'Prihvati' u CMP banneru.",
+    "Postavite zastavice 'Secure', 'HttpOnly' i 'SameSite=Lax/Strict' na sve kolačiće sesije.",
+    "Implementirajte certificirani Consent Management Platform (CMP) s prioritetnim blokiranjem skripti.",
+    "Preuzmite fontove lokalno na vlastiti poslužitelj (self-hosting) i uklonite pozive prema fonts.googleapis.com.",
+    "Generirajte DPA ugovore i ažurirajte Evidenciju aktivnosti obrade (ROPA) u GDPR Sentinelu.",
+    "Uklonite unaprijed označene privole, koristite HTTPS POST metodu i dodajte poveznicu na Pravila privatnosti ispod obrasca.",
+    "Postavite Content-Security-Policy, Strict-Transport-Security i Referrer-Policy: strict-origin-when-cross-origin.",
+    "U Pravila privatnosti uvrstite kontakt podatke AZOP-a (Selska cesta 136, Zagreb, azop.hr) i opis prava ispitanika."
+  ]
+}

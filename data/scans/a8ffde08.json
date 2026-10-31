@@ -1,52 +1,249 @@
 {
-  "url": "https://beat-battle-royale.com/",
+  "id": "a8ffde08",
+  "scan_id": "a8ffde08",
   "domain": "beat-battle-royale.com",
-  "scan_timestamp": "2026-10-31 02:48:06",
-  "ssl_valid": true,
-  "ssl_details": "Valjan SSL certifikat (Istjece: Dec 25 10:14:26 2026 GMT)",
-  "privacy_policy_found": false,
-  "privacy_policy_url": null,
-  "cookie_banner_found": false,
-  "cookies_detected": [],
-  "trackers_detected": [],
-  "forms_detected": [],
-  "security_headers": {
-    "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://raw.githubusercontent.com https://cdn.freesound.org; media-src 'self' blob: https://cdn.freesound.org; worker-src 'self' blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'",
-    "Strict-Transport-Security": null,
-    "X-Content-Type-Options": null,
-    "X-Frame-Options": null,
-    "Referrer-Policy": "no-referrer"
-  },
-  "risks": [
+  "url": "https://beat-battle-royale.com/",
+  "timestamp": "2026-10-31T04:00:31.199599+00:00",
+  "scan_date": "2026-10-31 05:00:38",
+  "duration_seconds": 7.21,
+  "status": "completed",
+  "pages_scanned_count": 11,
+  "crawled_pages": [
     {
-      "id": "RISK_PRIVACY_01",
-      "category": "Transparentnost i Informiranje",
-      "title": "Nisu pronadena Pravila privatnosti (Privacy Policy)",
-      "description": "Na web stranici nije pronadena lako dostupna poveznica na dokument o privatnosti kojim se posjetitelji informiraju o prikupljanju podataka.",
-      "risk_level": "Visok",
-      "impact": "Visok",
-      "probability": "Visoka",
-      "gdpr_article": "Clanci 12., 13. i 14. (Transparentne informacije i komunikacija)",
-      "recommendation": "Objavite detaljna Pravila privatnosti na vidljivom mjestu (npr. u podnožju stranice) s navedenim svrhama obrade, pravnim temeljima i pravima ispitanika."
+      "url": "https://beat-battle-royale.com/",
+      "status_code": 200,
+      "title": "BEAT Battle ROYALE",
+      "cookies_set": 0,
+      "forms_count": 0,
+      "depth": 0
     },
     {
-      "id": "RISK_HEADER_01",
-      "category": "Sigurnost i Enkripcija",
-      "title": "Nedostaje HSTS zaglavlje (Strict-Transport-Security)",
-      "description": "Preglednici nisu prisiljeni uvijek koristiti HTTPS vezu, što otvara mogucnost SSL stripping napada.",
-      "risk_level": "Nizak",
-      "impact": "Srednji",
-      "probability": "Niska",
-      "gdpr_article": "Clanak 32. (Tehnicke i organizacijske mjere zaštite)",
-      "recommendation": "Omogucite HTTP Strict Transport Security (HSTS) na web poslužitelju s minimalnim trajanjem od 6 mjeseci."
+      "url": "https://beat-battle-royale.com/privatnost",
+      "status_code": 200,
+      "title": "BEAT Battle ROYALE",
+      "cookies_set": 0,
+      "forms_count": 0,
+      "depth": 1
+    },
+    {
+      "url": "https://beat-battle-royale.com/pravila-privatnosti",
+      "status_code": 200,
+      "title": "BEAT Battle ROYALE",
+      "cookies_set": 0,
+      "forms_count": 0,
+      "depth": 1
+    },
+    {
+      "url": "https://beat-battle-royale.com/politika-privatnosti",
+      "status_code": 200,
+      "title": "BEAT Battle ROYALE",
+      "cookies_set": 0,
+      "forms_count": 0,
+      "depth": 1
+    },
+    {
+      "url": "https://beat-battle-royale.com/privacy-policy",
+      "status_code": 200,
+      "title": "BEAT Battle ROYALE",
+      "cookies_set": 0,
+      "forms_count": 0,
+      "depth": 1
+    },
+    {
+      "url": "https://beat-battle-royale.com/politika-kolacica",
+      "status_code": 200,
+      "title": "BEAT Battle ROYALE",
+      "cookies_set": 0,
+      "forms_count": 0,
+      "depth": 1
+    },
+    {
+      "url": "https://beat-battle-royale.com/privacy",
+      "status_code": 200,
+      "title": "BEAT Battle ROYALE",
+      "cookies_set": 0,
+      "forms_count": 0,
+      "depth": 1
+    },
+    {
+      "url": "https://beat-battle-royale.com/kolacici",
+      "status_code": 200,
+      "title": "BEAT Battle ROYALE",
+      "cookies_set": 0,
+      "forms_count": 0,
+      "depth": 1
+    },
+    {
+      "url": "https://beat-battle-royale.com/cookie-policy",
+      "status_code": 200,
+      "title": "BEAT Battle ROYALE",
+      "cookies_set": 0,
+      "forms_count": 0,
+      "depth": 1
+    },
+    {
+      "url": "https://beat-battle-royale.com/uvjeti-koristenja",
+      "status_code": 200,
+      "title": "BEAT Battle ROYALE",
+      "cookies_set": 0,
+      "forms_count": 0,
+      "depth": 1
+    },
+    {
+      "url": "https://beat-battle-royale.com/kontakt",
+      "status_code": 200,
+      "title": "BEAT Battle ROYALE",
+      "cookies_set": 0,
+      "forms_count": 0,
+      "depth": 1
     }
   ],
-  "compliance_score": 70,
-  "summary": {
-    "high": 1,
-    "medium": 0,
-    "low": 1,
-    "total": 2
+  "score": 86,
+  "compliance_score": 86,
+  "risk_level": "LOW",
+  "https": true,
+  "ssl_valid": true,
+  "http_to_https_redirect": false,
+  "has_cookie_banner": false,
+  "has_privacy_policy": true,
+  "has_cookie_policy": true,
+  "has_terms_of_service": true,
+  "has_dpo_contact": false,
+  "legal_pages": {
+    "privacy_policy": "https://beat-battle-royale.com/privatnost",
+    "cookie_policy": "https://beat-battle-royale.com/politika-kolacica",
+    "terms_of_service": "https://beat-battle-royale.com/uvjeti-koristenja",
+    "dpa_imprint_contact": "https://beat-battle-royale.com/kontakt"
   },
-  "scan_id": "a8ffde08"
+  "cmp_details": {
+    "has_cookie_banner": false,
+    "detected_cmp_platforms": [],
+    "google_consent_mode_v2": false,
+    "iab_tcf_v2_detected": false,
+    "has_accept_button": false,
+    "has_equal_reject_button": false,
+    "dark_pattern_suspected": false
+  },
+  "network_and_tls": {
+    "domain": "beat-battle-royale.com",
+    "ip_address": "172.67.152.201",
+    "reverse_dns": null,
+    "is_eu_ip_heuristic": true,
+    "ssl_valid": true,
+    "ssl_issuer": "Google Trust Services",
+    "ssl_subject": "beat-battle-royale.com",
+    "ssl_version": "TLSv1.3",
+    "ssl_cipher": "TLS_AES_256_GCM_SHA384",
+    "ssl_expires": "2026-12-25T10:14:26+00:00",
+    "ssl_days_remaining": 55,
+    "errors": []
+  },
+  "security_headers": {
+    "headers": {
+      "strict-transport-security": {
+        "present": false,
+        "value": null,
+        "gdpr_relevance": "Čl. 32 GDPR - Enkripcija u prijenosu (HSTS)"
+      },
+      "content-security-policy": {
+        "present": true,
+        "value": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://raw.githubusercontent.com https://cdn.freesound.org; media-src 'self' blob: https://cdn.freesound.org; worker-src 'self' blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'",
+        "gdpr_relevance": "Čl. 32 GDPR - Sprječavanje neovlaštenog ubacivanja skripti i curenja podataka (CSP)"
+      },
+      "x-content-type-options": {
+        "present": false,
+        "value": null,
+        "gdpr_relevance": "Zaštita od MIME-sniffing napada"
+      },
+      "x-frame-options": {
+        "present": false,
+        "value": null,
+        "gdpr_relevance": "Zaštita od Clickjacking prijevara pri davanju privole"
+      },
+      "referrer-policy": {
+        "present": true,
+        "value": "no-referrer",
+        "gdpr_relevance": "Sprječavanje curenja URL parametara trećim stranama"
+      },
+      "permissions-policy": {
+        "present": false,
+        "value": null,
+        "gdpr_relevance": "Ograničavanje pristupa kameri, mikrofonu i geolokaciji"
+      }
+    },
+    "present_count": 2,
+    "total_checked": 6,
+    "score_pct": 33.3
+  },
+  "cookies": [],
+  "cookies_count": 0,
+  "non_essential_preconsent_cookies": [],
+  "trackers": [],
+  "trackers_detected": [],
+  "third_party_domains": [],
+  "us_data_transfer_detected": false,
+  "dpa_processors_required": [],
+  "forms": [],
+  "forms_count": 0,
+  "contact_and_dpo": {
+    "emails_found": [],
+    "dpo_Contact_detected": false,
+    "dpo_emails": [],
+    "oib_candidates": [],
+    "mentions_azop_supervisory_authority": false,
+    "mentions_data_subject_rights": false
+  },
+  "headless_browser_used": false,
+  "local_storage_keys": [],
+  "issues": [
+    {
+      "severity": "MEDIUM",
+      "title": "Nedostaje automatsko HTTP -> HTTPS preusmjeravanje",
+      "description": "Posjetitelji koji pristupe putem http:// protokola nisu automatski preusmjereni na zaštićeni HTTPS.",
+      "gdpr_article": "Članak 32. GDPR",
+      "penalty_points": "5"
+    },
+    {
+      "severity": "LOW",
+      "title": "Nedostaju sigurnosna HTTP zaglavlja (2/6)",
+      "description": "Poslužitelj ne šalje preporučena zaglavlja (CSP, HSTS, X-Frame-Options, Referrer-Policy).",
+      "gdpr_article": "Članak 32. GDPR (Tehničke i organizacijske mjere)",
+      "penalty_points": "5"
+    },
+    {
+      "severity": "LOW",
+      "title": "Nije detektirana uputa o pravu na pritužbu AZOP-u",
+      "description": "Na skeniranim stranicama nije pronađena referenca na Agenciju za zaštitu osobnih podataka (AZOP).",
+      "gdpr_article": "Članak 13. st. 2. (d) GDPR",
+      "penalty_points": "4"
+    }
+  ],
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "title": "Nedostaje automatsko HTTP -> HTTPS preusmjeravanje",
+      "description": "Posjetitelji koji pristupe putem http:// protokola nisu automatski preusmjereni na zaštićeni HTTPS.",
+      "gdpr_article": "Članak 32. GDPR",
+      "penalty_points": "5"
+    },
+    {
+      "severity": "LOW",
+      "title": "Nedostaju sigurnosna HTTP zaglavlja (2/6)",
+      "description": "Poslužitelj ne šalje preporučena zaglavlja (CSP, HSTS, X-Frame-Options, Referrer-Policy).",
+      "gdpr_article": "Članak 32. GDPR (Tehničke i organizacijske mjere)",
+      "penalty_points": "5"
+    },
+    {
+      "severity": "LOW",
+      "title": "Nije detektirana uputa o pravu na pritužbu AZOP-u",
+      "description": "Na skeniranim stranicama nije pronađena referenca na Agenciju za zaštitu osobnih podataka (AZOP).",
+      "gdpr_article": "Članak 13. st. 2. (d) GDPR",
+      "penalty_points": "4"
+    }
+  ],
+  "recommendations": [
+    "Konfigurirajte 301 preusmjeravanje sa svih HTTP ruta na HTTPS na razini poslužitelja ili Cloudflare Edgea.",
+    "Postavite Content-Security-Policy, Strict-Transport-Security i Referrer-Policy: strict-origin-when-cross-origin.",
+    "U Pravila privatnosti uvrstite kontakt podatke AZOP-a (Selska cesta 136, Zagreb, azop.hr) i opis prava ispitanika."
+  ]
 }

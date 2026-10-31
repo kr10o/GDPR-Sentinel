@@ -1,234 +1,358 @@
-import os
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+GDPR Sentinel - FastAPI SaaS Backend (app.py)
+Fully compatible with uvicorn, FastAPI, Jinja2, APScheduler (monitor.py),
+scanner.py, risk_analyzer.py, and generator.py.
+"""
+
+from __future__ import annotations
+
+import datetime
 import json
-import uuid
-import re
+import logging
+import os
 from pathlib import Path
-from contextlib import asynccontextmanager
-from datetime import datetime
-from fastapi import FastAPI, Request, Form, BackgroundTasks, HTTPException
-from fastapi.responses import HTMLResponse, FileResponse, JSONResponse
+from typing import Any, Dict, List, Optional
+
+import uvicorn
+from fastapi import Body, FastAPI, HTTPException, Query, Request
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from apscheduler.schedulers.background import BackgroundScheduler
-import uvicorn
 
-from models import CompanyProfile, RegulatorySettings, ScanResult
-from scanner import scan_domain
-from risk_analyzer import analyze_gdpr_risks
-from generator import generate_pdf_report, generate_document_pdf
-from templates_library import get_privacy_policy_markdown, get_cookie_policy_markdown, get_dpa_markdown, get_ropa_markdown
-from monitor import load_regulatory_updates, check_for_gdpr_updates, mark_update_read, SETTINGS_FILE
+from generator import DocumentGenerator
+from risk_analyzer import RiskAnalyzer
+from scanner import GDPRScanner
 
-@asynccontextmanager
-async def lifespan(app):
-    configure_schedule(load_regulatory_settings())
-    scheduler.start()
-    yield
-    scheduler.shutdown(wait=False)
+logging.basicConfig(
+    level=logging.INFO,
+    format="[%(asctime)s] [%(levelname)s] %(name)s: %(message)s",
+)
+logger = logging.getLogger("gdpr_sentinel.app")
 
-app = FastAPI(title="GDPR Sentinel", lifespan=lifespan)
+BASE_DIR = Path(__file__).resolve().parent
+DATA_DIR = BASE_DIR / "data"
+SCANS_DIR = DATA_DIR / "scans"
+OUTPUT_PDF_DIR = BASE_DIR / "output" / "pdf"
+GENERATED_DOCS_DIR = BASE_DIR / "generated_docs"
+COMPANY_PROFILE_PATH = DATA_DIR / "company_profile.json"
+REGULATORY_UPDATES_PATH = DATA_DIR / "regulatory_updates.json"
+REGULATORY_SETTINGS_PATH = DATA_DIR / "regulatory_settings.json"
 
-app.mount("/static", StaticFiles(directory=str(Path(__file__).parent / "static")), name="static")
-templates = Jinja2Templates(directory=str(Path(__file__).parent / "templates"))
+for folder in (DATA_DIR, SCANS_DIR, OUTPUT_PDF_DIR, GENERATED_DOCS_DIR):
+    folder.mkdir(parents=True, exist_ok=True)
 
-PROFILE_FILE = str(Path(__file__).parent / "data/company_profile.json")
-SCANS_DIR = str(Path(__file__).parent / "data/scans")
-GENERATED_DIR = str(Path(__file__).parent / "generated_docs")
+app = FastAPI(
+    title="GDPR Sentinel SaaS",
+    description="Forenzički GDPR Crawler, Analizator Rizika i Generator Dokumenata",
+    version="2.0.0",
+)
 
-os.makedirs("data", exist_ok=True)
-os.makedirs(SCANS_DIR, exist_ok=True)
-os.makedirs(GENERATED_DIR, exist_ok=True)
+app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
+templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
-# Helper functions for persistence
-def load_company_profile() -> CompanyProfile:
-    if os.path.exists(PROFILE_FILE):
+risk_analyzer = RiskAnalyzer(company_profile_path=COMPANY_PROFILE_PATH)
+doc_generator = DocumentGenerator(
+    output_pdf_dir=OUTPUT_PDF_DIR,
+    generated_docs_dir=GENERATED_DOCS_DIR,
+    company_profile_path=COMPANY_PROFILE_PATH,
+)
+
+
+# ============================================================================
+# HELPER FUNCTIONS FOR LOADING & ENRICHING SCANS FROM data/scans/*.json
+# ============================================================================
+
+def _load_raw_scan(scan_id: str) -> Optional[Dict[str, Any]]:
+    clean_id = Path(scan_id).stem
+    target_file = SCANS_DIR / f"{clean_id}.json"
+    if not target_file.is_file():
+        return None
+    try:
+        with target_file.open("r", encoding="utf-8") as fh:
+            return json.load(fh)
+    except Exception as exc:
+        logger.error("Failed reading scan %s: %s", target_file, exc)
+        return None
+
+
+def _enrich_scan_payload(raw_scan: Dict[str, Any]) -> Dict[str, Any]:
+    analysis = risk_analyzer.analyze_scan(raw_scan)
+    enriched = dict(raw_scan)
+    enriched["id"] = raw_scan.get("id") or raw_scan.get("scan_id") or analysis["scan_id"]
+    enriched["scan_id"] = enriched["id"]
+    enriched["domain"] = analysis["domain"]
+    enriched["score"] = analysis["score"]
+    enriched["compliance_score"] = analysis["score"]
+    enriched["risk_level"] = analysis["risk_level"]
+    enriched["risk_label_hr"] = analysis["risk_label_hr"]
+    enriched["cookie_audit"] = analysis["cookie_audit"]
+    enriched["pages_audit"] = analysis["pages_audit"]
+    enriched["ropa_entries"] = analysis["ropa_entries"]
+    enriched["issues"] = analysis["issues"]
+    enriched["recommendations"] = analysis["recommendations"]
+    enriched["pdf_links"] = {
+        "pregled": "/output/pdf/pregled.pdf",
+        "kolacici": "/output/pdf/kolacici.pdf",
+        "ropa": "/output/pdf/ropa.pdf",
+        "privatnost": "/output/pdf/privatnost.pdf",
+        "dpa": "/output/pdf/dpa.pdf",
+    }
+    return enriched
+
+
+def _load_all_enriched_scans() -> List[Dict[str, Any]]:
+    scans: List[Dict[str, Any]] = []
+    if not SCANS_DIR.exists():
+        return scans
+
+    json_files = sorted(
+        SCANS_DIR.glob("*.json"),
+        key=lambda p: p.stat().st_mtime,
+        reverse=True,
+    )
+    for jf in json_files:
         try:
-            with open(PROFILE_FILE, "r", encoding="utf-8") as f:
-                data = json.load(f)
-                return CompanyProfile(**data)
+            with jf.open("r", encoding="utf-8") as fh:
+                raw = json.load(fh)
+            if not isinstance(raw, dict):
+                continue
+            if "id" not in raw and "scan_id" not in raw:
+                raw["id"] = jf.stem
+            scans.append(_enrich_scan_payload(raw))
+        except Exception as exc:
+            logger.warning("Skipping invalid scan file %s: %s", jf, exc)
+
+    return scans
+
+
+def _load_json_file(path: Path, default: Any) -> Any:
+    if path.is_file():
+        try:
+            with path.open("r", encoding="utf-8") as fh:
+                return json.load(fh)
         except Exception:
             pass
-    profile = CompanyProfile()
-    save_company_profile(profile)
-    return profile
+    return default
 
-def save_company_profile(profile: CompanyProfile):
-    with open(PROFILE_FILE, "w", encoding="utf-8") as f:
-        json.dump(profile.model_dump(), f, ensure_ascii=False, indent=2)
 
-def load_regulatory_settings() -> RegulatorySettings:
-    if os.path.exists(SETTINGS_FILE):
-        try:
-            with open(SETTINGS_FILE, "r", encoding="utf-8") as f:
-                data = json.load(f)
-                return RegulatorySettings(**data)
-        except Exception:
-            pass
-    settings = RegulatorySettings()
-    save_regulatory_settings(settings)
-    return settings
-
-def save_regulatory_settings(settings: RegulatorySettings):
-    with open(SETTINGS_FILE, "w", encoding="utf-8") as f:
-        json.dump(settings.model_dump(), f, ensure_ascii=False, indent=2)
-
-# Scheduler for periodic checking
-scheduler = BackgroundScheduler()
-
-def scheduled_regulatory_check():
-    settings = load_regulatory_settings()
-    if settings.is_active:
-        print(f"[{datetime.now()}] Pokrecem periodicku provjeru ažuriranja GDPR propisa...")
-        check_for_gdpr_updates()
-
-def configure_schedule(settings):
-    hours = {"hourly": 1, "daily": 24, "weekly": 168, "monthly": 720}[settings.check_frequency]
-    scheduler.add_job(scheduled_regulatory_check, 'interval', hours=hours, id='gdpr_monitor', replace_existing=True)
+# ============================================================================
+# WEB & REST API ROUTES
+# ============================================================================
 
 @app.get("/", response_class=HTMLResponse)
-def home(request: Request):
-    profile = load_company_profile()
-    settings = load_regulatory_settings()
-    updates = load_regulatory_updates()
-    unread_count = sum(1 for u in updates if not u.get("read", False))
+async def index(request: Request):
+    scans = _load_all_enriched_scans()
+    company = risk_analyzer.load_company_profile()
     return templates.TemplateResponse(
         request=request,
         name="index.html",
         context={
-            "profile": profile,
-            "settings": settings,
-            "updates": updates,
-            "unread_count": unread_count
-        }
+            "initial_scans": scans,
+            "company_profile": company,
+        },
     )
 
+
+@app.get("/api/scans")
+async def api_list_scans():
+    scans = _load_all_enriched_scans()
+    return {"status": "ok", "count": len(scans), "scans": scans}
+
+
+@app.get("/api/scans/{scan_id}")
+async def api_get_scan(scan_id: str):
+    raw = _load_raw_scan(scan_id)
+    if not raw:
+        return JSONResponse(
+            status_code=404,
+            content={"status": "error", "message": f"Sken '{scan_id}' nije pronađen."},
+        )
+    return {"status": "ok", "scan": _enrich_scan_payload(raw)}
+
+
 @app.post("/api/scan")
-def run_scan(target_url: str = Form(...)):
-    if not target_url.strip():
-        raise HTTPException(status_code=400, detail="Molimo unesite domenu ili URL.")
-    
-    # Run scan
+async def api_run_scan(payload: Dict[str, Any] = Body(default={})):
+    target_domain = str(payload.get("domain") or payload.get("url") or "").strip()
+    if not target_domain:
+        return JSONResponse(
+            status_code=400,
+            content={"status": "error", "message": "Unesite domenu ili URL za skeniranje."},
+        )
+
+    max_pages = int(payload.get("max_pages", 12))
+    max_depth = int(payload.get("max_depth", 2))
+    scan_id = payload.get("scan_id") or None
+
     try:
-        raw_scan = scan_domain(target_url.strip())
-    except ValueError as exc:
-        raise HTTPException(status_code=400, detail=str(exc)) from exc
-    if raw_scan.get("error"):
-        raise HTTPException(status_code=502, detail=raw_scan["error"])
-    # Run advanced risk analysis
-    risk_analysis = analyze_gdpr_risks(raw_scan)
-    
-    scan_id = str(uuid.uuid4())[:8]
-    full_result = {
-        **raw_scan,
-        **risk_analysis,
-        "scan_id": scan_id
-    }
-    
-    # Save scan result
-    scan_file = os.path.join(SCANS_DIR, f"{scan_id}.json")
-    with open(scan_file, "w", encoding="utf-8") as f:
-        json.dump(full_result, f, ensure_ascii=False, indent=2)
-        
-    # Generate audit PDF report immediately
-    pdf_filename = f"GDPR_Izvjestaj_{full_result.get('domain', 'audit')}_{scan_id}.pdf"
-    pdf_path = os.path.join(GENERATED_DIR, pdf_filename)
-    generate_pdf_report(full_result, pdf_path)
-    
-    full_result["pdf_download_url"] = f"/download/{pdf_filename}"
-    return JSONResponse(full_result)
+        scanner = GDPRScanner(
+            max_pages=max_pages,
+            max_depth=max_depth,
+            scans_dir=SCANS_DIR,
+        )
+        raw_report = await scanner.scan_domain_async(
+            target_domain, save_to_disk=True, scan_id=scan_id
+        )
+        enriched = _enrich_scan_payload(raw_report)
+        pdf_paths = doc_generator.generate_all_reports(raw_report)
+        enriched["generated_files"] = pdf_paths
+        return {
+            "status": "ok",
+            "message": f"Domena {enriched['domain']} uspješno skenirana ({enriched['pages_audit']['total_pages_crawled']} podstranica).",
+            "scan": enriched,
+        }
+    except Exception as exc:
+        logger.exception("Error scanning domain %s", target_domain)
+        return JSONResponse(
+            status_code=500,
+            content={"status": "error", "message": f"Greška pri skeniranju: {exc}"},
+        )
 
-@app.get("/api/profile")
-def get_profile():
-    return load_company_profile()
 
-@app.post("/api/profile")
-def update_profile(profile_data: CompanyProfile):
-    save_company_profile(profile_data)
-    return {"status": "success", "message": "Podaci o kompaniji uspješno spremljeni."}
+@app.post("/api/rescan-all")
+async def api_rescan_all_loaded_domains(payload: Dict[str, Any] = Body(default={})):
+    max_pages = int(payload.get("max_pages", 12))
+    max_depth = int(payload.get("max_depth", 2))
 
-@app.get("/api/regulatory/updates")
-def get_updates():
-    return load_regulatory_updates()
+    try:
+        scanner = GDPRScanner(
+            max_pages=max_pages,
+            max_depth=max_depth,
+            scans_dir=SCANS_DIR,
+        )
+        updated_reports = await scanner.rescan_loaded_domains_async(overwrite_existing_ids=True)
+        enriched_list = [_enrich_scan_payload(r) for r in updated_reports]
+        if updated_reports:
+            doc_generator.generate_all_reports(updated_reports[0])
 
-@app.post("/api/regulatory/check-now")
-def trigger_check():
-    updates = check_for_gdpr_updates()
-    return {"status": "success", "updates": updates}
+        return {
+            "status": "ok",
+            "message": f"Uspješno ponovno skenirano {len(enriched_list)} učitanih domena.",
+            "count": len(enriched_list),
+            "scans": enriched_list,
+        }
+    except Exception as exc:
+        logger.exception("Error during batch rescan")
+        return JSONResponse(
+            status_code=500,
+            content={"status": "error", "message": f"Greška pri batch skeniranju: {exc}"},
+        )
 
-@app.post("/api/regulatory/mark-read/{update_id}")
-def mark_read(update_id: str):
-    mark_update_read(update_id)
-    return {"status": "success"}
 
-@app.post("/api/regulatory/settings")
-def update_regulatory_settings(settings: RegulatorySettings):
-    save_regulatory_settings(settings)
-    configure_schedule(settings)
-    return {"status": "success", "message": "Postavke pracenja i obavijesti ažurirane."}
+@app.post("/api/generate-pdf")
+@app.post("/api/generate")
+async def api_generate_pdfs(payload: Dict[str, Any] = Body(default={})):
+    scan_id = str(payload.get("scan_id") or payload.get("id") or "").strip()
+    doc_type = str(payload.get("doc_type") or payload.get("type") or "all").strip().lower()
 
-@app.post("/api/generate-doc")
-def generate_document(doc_type: str = Form(...), scan_id: str = Form(None)):
-    profile = load_company_profile()
-    
-    detected_cookies = []
+    raw_scan: Optional[Dict[str, Any]] = None
     if scan_id:
-        if not re.fullmatch(r"[a-f0-9]{8}", scan_id):
-            raise HTTPException(status_code=400, detail="Neispravan ID skeniranja.")
-        scan_file = os.path.join(SCANS_DIR, f"{scan_id}.json")
-        if os.path.exists(scan_file):
-            with open(scan_file, "r", encoding="utf-8") as f:
-                scan_data = json.load(f)
-                detected_cookies = scan_data.get("cookies_detected", [])
-    
-    now_str = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
-    
-    if doc_type == "privacy_policy":
-        md_content = get_privacy_policy_markdown(profile)
-        base_name = f"Pravila_Privatnosti_{now_str}"
-        title = "Pravila Privatnosti"
-    elif doc_type == "cookie_policy":
-        md_content = get_cookie_policy_markdown(profile, detected_cookies)
-        base_name = f"Politika_Kolacica_{now_str}"
-        title = "Politika Kolacica"
-    elif doc_type == "dpa":
-        md_content = get_dpa_markdown(profile)
-        base_name = f"Ugovor_DPA_{now_str}"
-        title = "Ugovor o Obradi Podataka (DPA)"
-    elif doc_type == "ropa":
-        md_content = get_ropa_markdown(profile)
-        base_name = f"Evidencija_ROPA_{now_str}"
-        title = "Evidencija Aktivnosti Obrade (ROPA)"
-    else:
-        raise HTTPException(status_code=400, detail="Nepoznat tip dokumenta.")
+        raw_scan = _load_raw_scan(scan_id)
+    if not raw_scan:
+        all_scans = _load_all_enriched_scans()
+        if all_scans:
+            raw_scan = all_scans[0]
 
-    # Save Markdown file
-    md_filename = f"{base_name}.md"
-    md_path = os.path.join(GENERATED_DIR, md_filename)
-    with open(md_path, "w", encoding="utf-8") as f:
-        f.write(md_content)
+    if not raw_scan:
+        return JSONResponse(
+            status_code=404,
+            content={"status": "error", "message": "Nema dostupnog skena za generiranje PDF-a."},
+        )
 
-    # Save PDF file
-    pdf_filename = f"{base_name}.pdf"
-    pdf_path = os.path.join(GENERATED_DIR, pdf_filename)
-    generate_document_pdf(md_content, pdf_path, title=title)
+    try:
+        paths = doc_generator.generate_all_reports(raw_scan)
+        ts = int(datetime.datetime.now().timestamp())
+        urls = {
+            "pregled": f"/output/pdf/pregled.pdf?t={ts}",
+            "kolacici": f"/output/pdf/kolacici.pdf?t={ts}",
+            "ropa": f"/output/pdf/ropa.pdf?t={ts}",
+            "privatnost": f"/output/pdf/privatnost.pdf?t={ts}",
+            "dpa": f"/output/pdf/dpa.pdf?t={ts}",
+        }
+        selected_url = urls.get(doc_type, urls["pregled"])
+        return {
+            "status": "ok",
+            "message": f"PDF izvještaji za domenu {raw_scan.get('domain')} su uspješno generirani.",
+            "scan_id": raw_scan.get("id") or raw_scan.get("scan_id"),
+            "domain": raw_scan.get("domain"),
+            "pdf_url": selected_url,
+            "urls": urls,
+            "files": paths,
+        }
+    except Exception as exc:
+        logger.exception("Error generating PDF reports")
+        return JSONResponse(
+            status_code=500,
+            content={"status": "error", "message": f"Greška pri generiranju PDF-a: {exc}"},
+        )
 
+
+@app.get("/api/company-profile")
+@app.get("/api/company")
+async def api_get_company_profile():
+    return {"status": "ok", "profile": risk_analyzer.load_company_profile()}
+
+
+@app.post("/api/company-profile")
+@app.post("/api/company")
+async def api_save_company_profile(payload: Dict[str, Any] = Body(default={})):
+    current = risk_analyzer.load_company_profile()
+    for key in ("company_name", "address", "oib", "email", "dpo_name", "phone"):
+        if key in payload:
+            current[key] = str(payload[key]).strip()
+    COMPANY_PROFILE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    with COMPANY_PROFILE_PATH.open("w", encoding="utf-8") as fh:
+        json.dump(current, fh, ensure_ascii=False, indent=2)
     return {
-        "status": "success",
-        "doc_type": doc_type,
-        "title": title,
-        "md_url": f"/download/{md_filename}",
-        "pdf_url": f"/download/{pdf_filename}",
-        "markdown_content": md_content
+        "status": "ok",
+        "message": "Profil tvrtke uspješno spremljen.",
+        "profile": current,
     }
 
-@app.get("/download/{filename}")
-def download_file(filename: str):
-    file_path = os.path.join(GENERATED_DIR, filename)
-    if Path(filename).name != filename or "\\" in filename or Path(file_path).resolve().parent != Path(GENERATED_DIR).resolve():
-        raise HTTPException(status_code=400, detail="Neispravan naziv datoteke.")
-    if not os.path.isfile(file_path):
-        raise HTTPException(status_code=404, detail="Datoteka nije pronadena.")
-    return FileResponse(file_path, filename=filename)
+
+@app.get("/api/regulatory-updates")
+async def api_regulatory_updates():
+    updates = _load_json_file(REGULATORY_UPDATES_PATH, [])
+    settings = _load_json_file(REGULATORY_SETTINGS_PATH, {})
+    return {"status": "ok", "updates": updates, "settings": settings}
+
+
+@app.get("/output/pdf/{filename}")
+async def serve_output_pdf(filename: str, download: Optional[str] = Query(default=None)):
+    file_path = OUTPUT_PDF_DIR / Path(filename).name
+    if not file_path.is_file():
+        scans = _load_all_enriched_scans()
+        if scans:
+            doc_generator.generate_all_reports(scans[0])
+    if not file_path.is_file():
+        raise HTTPException(status_code=404, detail="PDF dokument nije pronađen.")
+
+    disposition = "attachment" if download == "1" else "inline"
+    return FileResponse(
+        path=str(file_path),
+        media_type="application/pdf",
+        filename=file_path.name if download == "1" else None,
+        headers={"Content-Disposition": f'{disposition}; filename="{file_path.name}"'},
+    )
+
+
+@app.get("/generated_docs/{filename}")
+async def serve_generated_docs(filename: str, download: Optional[str] = Query(default=None)):
+    file_path = GENERATED_DOCS_DIR / Path(filename).name
+    if not file_path.is_file():
+        raise HTTPException(status_code=404, detail="Dokument nije pronađen.")
+
+    media_type = "application/pdf" if file_path.suffix.lower() == ".pdf" else "text/markdown; charset=utf-8"
+    disposition = "attachment" if download == "1" else "inline"
+    return FileResponse(
+        path=str(file_path),
+        media_type=media_type,
+        filename=file_path.name if download == "1" else None,
+        headers={"Content-Disposition": f'{disposition}; filename="{file_path.name}"'},
+    )
+
 
 if __name__ == "__main__":
-    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("app:app", host="127.0.0.1", port=port, reload=True)

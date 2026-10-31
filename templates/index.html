@@ -1,363 +1,585 @@
 <!DOCTYPE html>
-<html lang="hr" class="h-full bg-slate-50">
+<html lang="hr" class="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GDPR Sentinel - Compliance Scanner & Regulatory Suite</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <script>
-        tailwind.config = { theme: { extend: { colors: { brand: { 50: "#f0fdfa", 500: "#0d9488", 600: "#0f766e", 700: "#115e59", 800: "#134e4a", 900: "#042f2e" } } } } }
-    </script>
-    <meta name="description" content="Provjerite web stranicu, razumijte GDPR rizike i pripremite dokumentaciju na jednom mjestu.">
-    <link rel="stylesheet" href="/static/app.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GDPR Sentinel // Forenzička SaaS Nadzorna Ploča</title>
+
+    <!-- CDN-First Web Imports -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+    <link rel="stylesheet" href="/static/app.css" />
 </head>
-<body class="h-full flex flex-col font-sans text-slate-800">
-    <header class="bg-slate-900 border-b border-slate-800 text-white sticky top-0 z-50 shadow-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center shadow-lg">
-                    <i class="fa-solid fa-shield-halved text-white text-lg"></i>
+<body class="bg-[#090d16] text-slate-100 min-h-screen antialiased selection:bg-sky-500/30 selection:text-sky-200">
+
+    <!-- GORNJA NAVIGACIJSKA TRAKA I KONTROLE CRAWLERA -->
+    <header class="sticky top-0 z-40 border-b border-slate-800/80 bg-[#090d16]/85 backdrop-blur-xl">
+        <div class="max-w-[1600px] mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+            <!-- Brand -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-sky-500/15 border border-sky-400/30 flex items-center justify-center shadow-inner shadow-sky-500/20">
+                    <i data-lucide="shield-check" class="w-5 h-5 text-sky-400"></i>
                 </div>
                 <div>
-                    <span class="text-xl font-bold tracking-tight text-white">GDPR Sentinel</span>
-                    <span class="text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full ml-2 font-mono">Radni prostor</span>
+                    <div class="flex items-center gap-2">
+                        <span class="font-bold tracking-tight text-lg text-white">GDPR SENTINEL</span>
+                        <span class="text-[11px] font-mono uppercase px-2 py-0.5 rounded-full bg-sky-500/15 text-sky-300 border border-sky-500/30">
+                            Crawler v2.0
+                        </span>
+                    </div>
+                    <p class="text-xs text-slate-400">Dubinska forenzika podstranica, Pre-Consent kolačića i ROPA evidencije</p>
                 </div>
             </div>
-            <nav class="flex space-x-1 sm:space-x-2 text-sm font-medium">
-                <button onclick="switchTab('scanner')" aria-current="page" aria-label="Skener i rizici" id="tab-scanner-btn" class="nav-btn px-4 py-2 rounded-lg bg-slate-800 text-white flex items-center gap-2">
-                    <i class="fa-solid fa-magnifying-glass"></i> <span class="hidden sm:inline">Skener & Rizici</span>
+
+            <!-- Forma za skeniranje nove ili odabrane domene -->
+            <form id="scan-form" class="flex flex-wrap items-center gap-2 flex-1 max-w-3xl">
+                <div class="relative flex-1 min-w-[240px]">
+                    <i data-lucide="globe" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                    <input
+                        id="domain-input"
+                        type="text"
+                        placeholder="Unesite domenu (npr. beat-battle-royale.com ili https://primjer.hr)"
+                        class="w-full pl-10 pr-4 py-2 text-sm rounded-lg bg-slate-900/90 border border-slate-700/80 text-white placeholder-slate-500 focus:outline-none focus:border-sky-400 transition"
+                        required
+                    />
+                </div>
+
+                <div class="flex items-center gap-1.5 bg-slate-900/90 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-300" title="Maksimalni broj podstranica po domeni">
+                    <span class="text-slate-400">Podstranica:</span>
+                    <select id="max-pages-select" class="bg-transparent text-sky-300 font-semibold focus:outline-none">
+                        <option value="8">8</option>
+                        <option value="12" selected>12</option>
+                        <option value="20">20</option>
+                        <option value="35">35</option>
+                    </select>
+                </div>
+
+                <div class="flex items-center gap-1.5 bg-slate-900/90 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-300" title="Dubina BFS pretraživanja (Depth)">
+                    <span class="text-slate-400">Dubina:</span>
+                    <select id="max-depth-select" class="bg-transparent text-sky-300 font-semibold focus:outline-none">
+                        <option value="1">1</option>
+                        <option value="2" selected>2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+
+                <button
+                    id="btn-scan-submit"
+                    type="submit"
+                    class="px-4 py-2 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold text-sm flex items-center gap-2 transition cursor-pointer shadow-lg shadow-sky-500/20"
+                >
+                    <i data-lucide="radar" class="w-4 h-4"></i>
+                    <span>Skeniraj domenu</span>
                 </button>
-                <button onclick="switchTab('docs')" aria-label="Dokumenti" id="tab-docs-btn" class="nav-btn px-4 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/60 flex items-center gap-2">
-                    <i class="fa-solid fa-file-contract"></i> <span class="hidden sm:inline">Generator Dokumenata</span>
+            </form>
+
+            <!-- Gumbi za masovni rescan i profil tvrtke -->
+            <div class="flex items-center gap-2">
+                <button
+                    id="btn-rescan-all"
+                    type="button"
+                    class="px-3.5 py-2 rounded-lg bg-slate-800/90 hover:bg-slate-700/90 border border-slate-700 text-slate-200 text-xs font-medium flex items-center gap-2 transition cursor-pointer"
+                    title="Ponovno skeniraj sve domene iz data/scans/*.json"
+                >
+                    <i data-lucide="refresh-cw" class="w-3.5 h-3.5 text-sky-400"></i>
+                    <span>Rescan svih domena</span>
                 </button>
-                <button onclick="switchTab('profile')" aria-label="Profil tvrtke" id="tab-profile-btn" class="nav-btn px-4 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/60 flex items-center gap-2">
-                    <i class="fa-solid fa-building-user"></i> <span class="hidden sm:inline">Profil Kompanije</span>
+
+                <button
+                    id="btn-open-company-modal"
+                    type="button"
+                    class="px-3.5 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 text-xs font-medium flex items-center gap-2 transition cursor-pointer"
+                >
+                    <i data-lucide="building-2" class="w-3.5 h-3.5 text-slate-400"></i>
+                    <span>Voditelj obrade</span>
                 </button>
-                <button onclick="switchTab('monitor')" aria-label="Praćenje objava" id="tab-monitor-btn" class="nav-btn px-4 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/60 flex items-center gap-2 relative">
-                    <i class="fa-solid fa-scale-balanced"></i> <span class="hidden sm:inline">Praćenje Propisa</span>
-                    <span id="unread-badge" class="{% if unread_count == 0 %}hidden{% endif %} absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold">{{ unread_count }}</span>
-                </button>
-            </nav>
+            </div>
         </div>
     </header>
-    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
-        <section id="tab-scanner" class="space-y-6">
-            <div class="hero glass">
-                <div class="hero-layout">
-                    <div class="hero-copy">
-                        <span class="eyebrow"><span class="status-dot"></span> VAŠA PRIVATNOST. JASNIJI SLJEDEĆI KORAK.</span>
-                        <h1>Otkrijte GDPR rizike.<br><span class="gradient-text">Znajte što popraviti.</span></h1>
-                        <p class="hero-description">Provjerite web stranicu, dobijte pregled mogućih rizika i pripremite dokumentaciju. Sve na jednom mjestu.</p>
-                        <form id="scanForm" onsubmit="handleScan(event)" class="search-bar">
-                            <label class="sr-only" for="targetUrl">Domena ili URL web stranice</label>
-                            <i class="fa-solid fa-globe" aria-hidden="true"></i>
-                            <input type="text" id="targetUrl" name="target_url" placeholder="Unesite svoju domenu.hr" required maxlength="2048" autocomplete="url" spellcheck="false">
-                            <button type="submit" id="scanSubmitBtn" class="primary-button">Provjeri stranicu <span aria-hidden="true">↗</span></button>
-                        </form>
-                        <div class="hero-actions"><a href="#kako-radi">Kako funkcionira <span aria-hidden="true">↓</span></a><button onclick="switchTab('docs')">Istraži dokumente <span aria-hidden="true">→</span></button></div>
-                        <p class="quiet-note">Analiza javno dostupnog HTML-a · PDF izvještaj · Konkretne preporuke</p>
+
+    <!-- OBAVIJEST / STATUSNA TRAKA -->
+    <div id="status-toast" class="hidden max-w-[1600px] mx-auto mt-3 px-4 sm:px-6">
+        <div id="status-toast-inner" class="px-4 py-2.5 rounded-xl border border-sky-500/40 bg-sky-500/10 text-sky-200 text-xs flex items-center justify-between">
+            <span id="status-toast-text">Sustav spreman.</span>
+            <button type="button" onclick="document.getElementById('status-toast').classList.add('hidden')" class="text-slate-400 hover:text-white">✕</button>
+        </div>
+    </div>
+
+    <!-- GLAVNI RASPORED: BOČNA LISTA UČITANIH DOMENA + SREDIŠNJA FORENZIČKA PLOČA -->
+    <main class="max-w-[1600px] mx-auto px-4 sm:px-6 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- LIJEVA KOLONA: UČITANE DOMENE IZ data/scans/*.json (3 kolone) -->
+        <aside class="lg:col-span-3 space-y-4">
+            <div class="glass-panel rounded-2xl p-4 border border-slate-800/90">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="database" class="w-4 h-4 text-sky-400"></i>
+                        <h2 class="text-sm font-semibold text-white">Učitane domene</h2>
                     </div>
-                    <div class="product-preview" aria-label="Ilustrativni primjer izvještaja">
-                        <div class="preview-top"><span><i class="fa-solid fa-shield-halved"></i> Sentinel pregled</span><span class="sample-label">PRIMJER</span></div>
-                        <div class="preview-score"><div class="score-ring">78<span>/ 100</span></div><div><strong>Jasnija slika privatnosti.</strong><p>Od nalaza do sljedećeg koraka.</p><span class="mini-pill">Prostor za poboljšanje</span></div></div>
-                        <div class="preview-row"><span><i class="fa-solid fa-lock"></i> SSL / TLS certifikat</span><span class="text-emerald-700">U redu ✓</span></div>
-                        <div class="preview-row"><span><i class="fa-solid fa-cookie-bite"></i> Kolačići i privola</span><span class="text-amber-700">Provjeriti ↗</span></div>
-                        <div class="preview-row"><span><i class="fa-solid fa-file-lines"></i> Pravila privatnosti</span><span class="text-emerald-700">Pronađeno ✓</span></div>
-                        <div class="preview-bottom"><span class="pdf-icon">PDF</span><div><strong>Nalazi koje možete podijeliti</strong><p>Pregled rizika i preporuka u jednom izvještaju.</p></div></div>
-                    </div>
+                    <span id="loaded-domains-count" class="text-xs font-mono px-2 py-0.5 rounded-md bg-slate-800 text-sky-300">0</span>
                 </div>
-                <div class="hero-strip"><span><i class="fa-solid fa-lock"></i> Sigurnost veze</span><span><i class="fa-solid fa-cookie-bite"></i> Kolačići i trackeri</span><span><i class="fa-solid fa-list-check"></i> Prioriteti za doradu</span><span><i class="fa-solid fa-file-arrow-down"></i> Dokumenti za preuzimanje</span></div>
-                <div role="status" aria-live="polite" id="scanLoading" class="hidden mt-8 text-center py-10 bg-slate-50 rounded-xl border border-dashed border-slate-300">
-                    <div class="inline-block animate-spin rounded-full h-10 w-10 border-4 border-brand-500 border-t-transparent mb-3"></div>
-                    <p class="font-medium text-slate-700">Analiziram domenu, provjeravam certifikate, kolačiće i vanjske skripte...</p>
+
+                <div class="relative mb-3">
+                    <i data-lucide="search" class="w-3.5 h-3.5 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2"></i>
+                    <input
+                        id="sidebar-domain-filter"
+                        type="text"
+                        placeholder="Filtriraj učitane domene..."
+                        class="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg bg-slate-900/90 border border-slate-800 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-sky-500"
+                    />
                 </div>
-            </div>
-            <div id="scanResults" class="hidden space-y-6">
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col lg:flex-row items-center justify-between gap-6">
-                    <div class="flex items-center gap-5 w-full lg:w-auto">
-                        <div id="scoreCircle" class="w-20 h-20 rounded-2xl flex flex-col items-center justify-center font-bold text-white shadow-md">
-                            <span id="scoreVal" class="text-2xl leading-none">0</span>
-                            <span class="text-[10px] tracking-widest uppercase opacity-80 mt-1">Skor</span>
-                        </div>
-                        <div>
-                            <div class="flex items-center gap-2">
-                                <h2 id="resDomain" class="text-xl font-bold text-slate-900">domena.com</h2>
-                                <span id="complianceBadge" class="text-xs font-semibold px-2.5 py-1 rounded-full"></span>
-                            </div>
-                            <p id="resTimestamp" class="text-xs text-slate-400 mt-1">Vrijeme skeniranja: -</p>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-3 gap-3 w-full lg:w-auto">
-                        <div class="bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-center">
-                            <span class="block text-xl font-extrabold text-red-600" id="highRiskCount">0</span>
-                            <span class="text-xs font-medium text-red-700">Visoki Rizik</span>
-                        </div>
-                        <div class="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-center">
-                            <span class="block text-xl font-extrabold text-amber-600" id="medRiskCount">0</span>
-                            <span class="text-xs font-medium text-amber-700">Srednji Rizik</span>
-                        </div>
-                        <div class="bg-blue-50 border border-blue-200 rounded-xl px-4 py-3 text-center">
-                            <span class="block text-xl font-extrabold text-blue-600" id="lowRiskCount">0</span>
-                            <span class="text-xs font-medium text-blue-700">Niski Rizik</span>
-                        </div>
-                    </div>
-                    <div class="w-full lg:w-auto flex flex-col sm:flex-row gap-2">
-                        <a id="downloadPdfBtn" href="#" target="_blank" class="px-5 py-3 bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold rounded-xl flex items-center justify-center gap-2 shadow-sm transition">
-                            <i class="fa-solid fa-file-pdf text-red-400"></i> Preuzmi PDF Izvještaj
-                        </a>
-                        <button onclick="transferScanToDocs()" class="px-4 py-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-300 text-sm font-semibold rounded-xl flex items-center justify-center gap-2 transition cursor-pointer">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i> Generiraj Dokumente
-                        </button>
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-                        <div class="flex items-center justify-between mb-2"><span class="text-xs font-semibold uppercase tracking-wider text-slate-400">SSL / TLS Sigurnost</span><span id="sslIcon"></span></div>
-                        <div id="sslStatus" class="font-bold text-slate-800 text-sm">Provjera...</div>
-                        <p id="sslDetails" class="text-xs text-slate-500 mt-1 line-clamp-2"></p>
-                    </div>
-                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-                        <div class="flex items-center justify-between mb-2"><span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Pravila Privatnosti</span><span id="privacyIcon"></span></div>
-                        <div id="privacyStatus" class="font-bold text-slate-800 text-sm">Provjera...</div>
-                        <p id="privacyDetails" class="text-xs text-slate-500 mt-1 truncate"></p>
-                    </div>
-                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-                        <div class="flex items-center justify-between mb-2"><span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Kolačići i Banner</span><span id="cookieIcon"></span></div>
-                        <div id="cookieStatus" class="font-bold text-slate-800 text-sm">Provjera...</div>
-                        <p id="cookieDetails" class="text-xs text-slate-500 mt-1"></p>
-                    </div>
-                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-                        <div class="flex items-center justify-between mb-2"><span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Vanjski Trackeri</span><span id="trackerIcon"></span></div>
-                        <div id="trackerStatus" class="font-bold text-slate-800 text-sm">0 detektirano</div>
-                        <p id="trackerDetails" class="text-xs text-slate-500 mt-1 truncate"></p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-                    <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
-                        <h3 class="font-bold text-slate-900 flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation text-amber-500"></i> Detaljna Procjena Nepravilnosti & Rizika</h3>
-                        <span class="text-xs text-slate-500">Mapirano prema GDPR člancima</span>
-                    </div>
-                    <div id="risksList" class="p-6 space-y-4"></div>
+
+                <div id="domains-list" class="space-y-2 max-h-[540px] overflow-y-auto pr-1 custom-scrollbar">
+                    <!-- Dinamički popunjava static/app.js -->
                 </div>
             </div>
-            <div class="landing-details" id="kako-radi">
-                <div class="section-heading"><span class="eyebrow">MANJE NAGAĐANJA. VIŠE PREGLEDA.</span><h2>Od domene do plana djelovanja.</h2><p>Tri povezana koraka za lakši rad na privatnosti vaše web stranice.</p></div>
-                <div class="feature-grid">
-                    <article class="glass feature-card mint"><span class="step-number">01 / PROVJERITE</span><i class="fa-solid fa-magnifying-glass feature-icon"></i><h3>Upoznajte svoju stranicu</h3><p>Pregledajte certifikat, poveznicu na pravila privatnosti, znakove cookie bannera i poznatih trackera u HTML-u.</p><button onclick="focusScanner()">Pokreni provjeru →</button></article>
-                    <article class="glass feature-card lavender"><span class="step-number">02 / RAZUMIJTE</span><i class="fa-solid fa-chart-simple feature-icon"></i><h3>Pretvorite nalaze u prioritete</h3><p>Pregledajte razine rizika, obrazloženja i preporuke. Preuzmite PDF i podijelite sljedeće korake sa svojim timom.</p><a href="#targetUrl" onclick="focusScanner()">Saznaj gdje početi →</a></article>
-                    <article class="glass feature-card peach"><span class="step-number">03 / PRIPREMITE</span><i class="fa-solid fa-file-circle-check feature-icon"></i><h3>Dokumenti s vašim podacima</h3><p>Pripremite pravila privatnosti, politiku kolačića, DPA i ROPA predloške na temelju profila tvrtke.</p><button onclick="switchTab('profile')">Uredi profil tvrtke →</button></article>
-                </div>
-                <div class="glass detail-band"><div><span class="eyebrow">JEDAN POVEZAN RADNI PROSTOR</span><h2>Provjera je tek početak.</h2><p>Od prvog nalaza do dokumentacije koju možete pregledati, doraditi i preuzeti.</p></div><div class="detail-list"><p><strong>PDF + Markdown</strong><span>Izvještaji za dijeljenje i tekstovi za daljnje uređivanje.</span></p><p><strong>Profil tvrtke</strong><span>Unesite podatke jednom i koristite ih u predlošcima.</span></p><p><strong>Pregled regulatornih objava</strong><span>Pratite dostupne objave i označite pročitane.</span></p></div></div>
-                <div class="faq"><h2>Dobro je znati prije provjere.</h2><details><summary>Što skener provjerava?</summary><p>Javno dostupan HTML, HTTP kolačiće, certifikat i poznate oznake trackera. Ne izvršava JavaScript niti testira sve interakcije s bannerom.</p></details><details><summary>Je li rezultat potvrda GDPR usklađenosti?</summary><p>Ne. Rezultat je automatizirana tehnička procjena i polazište za pregled. Stvarne obrade podataka i pravne osnove zahtijevaju dodatnu provjeru.</p></details><details><summary>Kako pripremiti dokumente?</summary><p>Uredite profil tvrtke, po želji pokrenite skeniranje i otvorite generator. Dobivene predloške pregledajte i prilagodite stvarnom poslovanju prije objave.</p></details></div>
-                <div class="glass final-cta"><span class="eyebrow">SLJEDEĆI KORAK JE JEDNOSTAVAN</span><h2>Vaša domena.<br>Jasniji pregled rizika.</h2><p>Započnite provjerom i otkrijte gdje usmjeriti pažnju.</p><button class="primary-button" onclick="focusScanner()">Provjeri svoju stranicu ↗</button><button class="secondary-button" onclick="switchTab('docs')">Otvori generator dokumenata</button></div>
-            </div>
-        </section>
-        <section id="tab-docs" class="hidden space-y-6">
-            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 lg:p-8">
-                <div class="max-w-3xl">
-                    <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Automatsko Generiranje GDPR Dokumentacije</h1>
-                    <p class="text-slate-500 mt-2 text-sm">Pripremite predloške dokumenata u <b>PDF</b> i <b>Markdown (.md)</b> formatu. Sva polja automatski se popunjavaju podacima vaše kompanije i nalazima skeniranja.</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
-                    <div class="border border-slate-200 hover:border-brand-500 rounded-2xl p-6 flex flex-col justify-between transition group bg-slate-50/50 hover:bg-white shadow-sm">
-                        <div>
-                            <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-user-shield"></i></div>
-                            <h3 class="font-bold text-slate-900 text-lg">Pravila Privatnosti</h3>
-                            <p class="text-xs text-slate-500 mt-2">Kompletna izjava o obradi podataka sukladno clancima 12., 13. i 14. GDPR-a, ukljucujuci prava ispitanika i DPO podatke.</p>
-                        </div>
-                        <button onclick="requestDocGeneration('privacy_policy')" class="mt-6 w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm rounded-xl flex items-center justify-center gap-2 shadow-sm transition cursor-pointer">
-                            <i class="fa-solid fa-file-arrow-down"></i> Generiraj Dokument
-                        </button>
+
+            <!-- Brzi pristup generiranju i pregledu svih 5 PDF izvještaja -->
+            <div class="glass-panel rounded-2xl p-4 border border-slate-800/90 space-y-3">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="file-text" class="w-4 h-4 text-sky-400"></i>
+                        <h3 class="text-sm font-semibold text-white">PDF Izvještaji (output/pdf/)</h3>
                     </div>
-                    <div class="border border-slate-200 hover:border-brand-500 rounded-2xl p-6 flex flex-col justify-between transition group bg-slate-50/50 hover:bg-white shadow-sm">
-                        <div>
-                            <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-cookie-bite"></i></div>
-                            <h3 class="font-bold text-slate-900 text-lg">Politika Kolacica</h3>
-                            <p class="text-xs text-slate-500 mt-2">Uskladeno s ePrivacy direktivom. Automatski uvrsatava tabelu kolacica identificiranih tijekom analize domene.</p>
-                        </div>
-                        <button onclick="requestDocGeneration('cookie_policy')" class="mt-6 w-full py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-medium text-sm rounded-xl flex items-center justify-center gap-2 shadow-sm transition cursor-pointer">
-                            <i class="fa-solid fa-file-arrow-down"></i> Generiraj Dokument
-                        </button>
-                    </div>
-                    <div class="border border-slate-200 hover:border-brand-500 rounded-2xl p-6 flex flex-col justify-between transition group bg-slate-50/50 hover:bg-white shadow-sm">
-                        <div>
-                            <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-handshake"></i></div>
-                            <h3 class="font-bold text-slate-900 text-lg">Ugovor o Obradi (DPA)</h3>
-                            <p class="text-xs text-slate-500 mt-2">Predlozak ugovora izmedu voditelja obrade i vanjskih izvrsitelja (clanak 28. GDPR) s definiranim mjerama zastite.</p>
-                        </div>
-                        <button onclick="requestDocGeneration('dpa')" class="mt-6 w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-sm rounded-xl flex items-center justify-center gap-2 shadow-sm transition cursor-pointer">
-                            <i class="fa-solid fa-file-arrow-down"></i> Generiraj Dokument
-                        </button>
-                    </div>
-                    <div class="border border-slate-200 hover:border-brand-500 rounded-2xl p-6 flex flex-col justify-between transition group bg-slate-50/50 hover:bg-white shadow-sm">
-                        <div>
-                            <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-book-bookmark"></i></div>
-                            <h3 class="font-bold text-slate-900 text-lg">Evidencija Obrade (ROPA)</h3>
-                            <p class="text-xs text-slate-500 mt-2">Službena evidencija aktivnosti obrade prema Clanku 30. GDPR-a s kategorijama ispitanika i rokovima pohrane.</p>
-                        </div>
-                        <button onclick="requestDocGeneration('ropa')" class="mt-6 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-medium text-sm rounded-xl flex items-center justify-center gap-2 shadow-sm transition cursor-pointer">
-                            <i class="fa-solid fa-file-arrow-down"></i> Generiraj Dokument
-                        </button>
-                    </div>
-                </div>
-                <div id="docResultArea" class="hidden mt-8 pt-8 border-t border-slate-200">
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
-                        <div>
-                            <h3 id="docResultTitle" class="text-lg font-bold text-slate-900">Generirani Dokument</h3>
-                            <p class="text-xs text-slate-500">Uspješno sastavljeno i renderirano na temelju profila kompanije</p>
-                        </div>
-                        <div class="flex gap-2">
-                            <a id="docPdfDownload" href="#" target="_blank" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded-lg flex items-center gap-1.5 shadow-sm"><i class="fa-solid fa-file-pdf"></i> Preuzmi PDF</a>
-                            <a id="docMdDownload" href="#" target="_blank" class="px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white text-xs font-semibold rounded-lg flex items-center gap-1.5 shadow-sm"><i class="fa-brands fa-markdown"></i> Preuzmi .MD</a>
-                        </div>
-                    </div>
-                    <div class="bg-slate-900 text-slate-200 rounded-xl p-5 overflow-auto max-h-96 font-mono text-xs leading-relaxed border border-slate-800">
-                        <pre id="docMarkdownPreview"></pre>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="tab-profile" class="hidden space-y-6">
-            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 lg:p-8">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                    <div>
-                        <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Postavke Kompanije i Podataka o Obradi</h1>
-                        <p class="text-slate-500 mt-1 text-sm">Ove informacije se automatski umeću u sva generirana Pravila privatnosti, Cookie politike i DPA ugovore.</p>
-                    </div>
-                    <button type="button" onclick="saveProfile()" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm rounded-xl shadow-sm flex items-center gap-2 transition cursor-pointer">
-                        <i class="fa-solid fa-floppy-disk"></i> Spremi Promjene
+                    <button
+                        id="btn-regenerate-pdfs"
+                        type="button"
+                        class="text-[11px] px-2.5 py-1 rounded-md bg-sky-500/15 hover:bg-sky-500/25 text-sky-300 border border-sky-500/30 transition cursor-pointer"
+                    >
+                        Osvježi PDF-ove
                     </button>
                 </div>
-                <form id="profileForm" class="mt-8 space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <p class="text-xs text-slate-400">
+                    Pregledajte generirane PDF tablice izravno u pregledniku ili ih preuzmite na disk:
+                </p>
+
+                <div class="space-y-2 text-xs">
+                    <div class="flex items-center justify-between p-2 rounded-lg bg-slate-900/80 border border-slate-800">
                         <div>
-                            <label for="prof_name" class="block text-xs font-semibold text-slate-600 uppercase mb-1">Naziv Tvrtke / Obrta</label>
-                            <input type="text" id="prof_name" value="{{ profile.name }}" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                            <div class="font-medium text-slate-200">pregled.pdf</div>
+                            <div class="text-[11px] text-slate-400">Glavni revizijski izvještaj + tablice</div>
                         </div>
-                        <div>
-                            <label for="prof_id_number" class="block text-xs font-semibold text-slate-600 uppercase mb-1">OIB / Porezni Identifikator</label>
-                            <input type="text" id="prof_id_number" value="{{ profile.id_number }}" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
-                        </div>
-                        <div>
-                            <label for="prof_address" class="block text-xs font-semibold text-slate-600 uppercase mb-1">Službena Adresa i Sjedište</label>
-                            <input type="text" id="prof_address" value="{{ profile.address }}" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
-                        </div>
-                        <div>
-                            <label for="prof_website" class="block text-xs font-semibold text-slate-600 uppercase mb-1">Web Stranica</label>
-                            <input type="text" id="prof_website" value="{{ profile.website }}" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
-                        </div>
-                        <div>
-                            <label for="prof_email" class="block text-xs font-semibold text-slate-600 uppercase mb-1">Službeni E-mail za Privatnost</label>
-                            <input type="email" id="prof_email" value="{{ profile.email }}" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
-                        </div>
-                        <div>
-                            <label for="prof_phone" class="block text-xs font-semibold text-slate-600 uppercase mb-1">Kontakt Telefon</label>
-                            <input type="text" id="prof_phone" value="{{ profile.phone }}" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
-                        </div>
-                        <div>
-                            <label for="prof_dpo_name" class="block text-xs font-semibold text-slate-600 uppercase mb-1">Službenik za zaštitu podataka (DPO Ime)</label>
-                            <input type="text" id="prof_dpo_name" value="{{ profile.dpo_name or '' }}" placeholder="Opcionalno (npr. Marko Horvat)" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
-                        </div>
-                        <div>
-                            <label for="prof_dpo_email" class="block text-xs font-semibold text-slate-600 uppercase mb-1">DPO Kontakt E-mail</label>
-                            <input type="email" id="prof_dpo_email" value="{{ profile.dpo_email or '' }}" placeholder="dpo@firma.hr" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        <div class="flex items-center gap-1.5">
+                            <button type="button" onclick="window.SentinelApp.openPdfPreview('pregled')" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-sky-300 cursor-pointer">Pregled</button>
+                            <a href="/output/pdf/pregled.pdf?download=1" class="px-2 py-1 rounded bg-sky-500/20 hover:bg-sky-500/30 text-sky-200">PDF ↓</a>
                         </div>
                     </div>
-                    <div class="border-t border-slate-200 pt-6 space-y-4">
+
+                    <div class="flex items-center justify-between p-2 rounded-lg bg-slate-900/80 border border-slate-800">
                         <div>
-                            <label for="prof_purposes" class="block text-xs font-semibold text-slate-600 uppercase mb-1">Svrhe obrade podataka (jedna po liniji)</label>
-                            <textarea id="prof_purposes" rows="3" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">{{ profile.data_purposes | join('\n') }}</textarea>
+                            <div class="font-medium text-slate-200">kolacici.pdf</div>
+                            <div class="text-[11px] text-slate-400">Pre-Consent tablica + Politika kolačića</div>
                         </div>
-                        <div>
-                            <label for="prof_third_parties" class="block text-xs font-semibold text-slate-600 uppercase mb-1">Treće strane i izvršitelji obrade (jedna po liniji)</label>
-                            <textarea id="prof_third_parties" rows="3" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">{{ profile.third_parties | join('\n') }}</textarea>
-                        </div>
-                        <div>
-                            <label for="prof_retention" class="block text-xs font-semibold text-slate-600 uppercase mb-1">Rok čuvanja podataka</label>
-                            <input type="text" id="prof_retention" value="{{ profile.data_retention_period }}" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        <div class="flex items-center gap-1.5">
+                            <button type="button" onclick="window.SentinelApp.openPdfPreview('kolacici')" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-sky-300 cursor-pointer">Pregled</button>
+                            <a href="/output/pdf/kolacici.pdf?download=1" class="px-2 py-1 rounded bg-sky-500/20 hover:bg-sky-500/30 text-sky-200">PDF ↓</a>
                         </div>
                     </div>
-                </form>
-            </div>
-        </section>
-        <section id="tab-monitor" class="hidden space-y-6">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 lg:p-8">
-                    <div class="flex items-center justify-between pb-6 border-b border-slate-100">
+
+                    <div class="flex items-center justify-between p-2 rounded-lg bg-slate-900/80 border border-slate-800">
                         <div>
-                            <h2 class="text-xl font-bold text-slate-900">Regulatorne Promjene & Smjernice</h2>
-                            <p class="text-xs text-slate-500 mt-1">Praćenje odluka EDPB-a i europskih nadzornih tijela u stvarnom vremenu</p>
+                            <div class="font-medium text-slate-200">ropa.pdf</div>
+                            <div class="text-[11px] text-slate-400">Evidencija aktivnosti obrade (Čl. 30)</div>
                         </div>
-                        <button onclick="checkRegulatoryUpdatesNow()" id="checkUpdatesBtn" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-xl flex items-center gap-2 transition cursor-pointer">
-                            <i class="fa-solid fa-arrows-rotate"></i> Provjeri Sada
-                        </button>
+                        <div class="flex items-center gap-1.5">
+                            <button type="button" onclick="window.SentinelApp.openPdfPreview('ropa')" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-sky-300 cursor-pointer">Pregled</button>
+                            <a href="/output/pdf/ropa.pdf?download=1" class="px-2 py-1 rounded bg-sky-500/20 hover:bg-sky-500/30 text-sky-200">PDF ↓</a>
+                        </div>
                     </div>
-                    <div id="updatesContainer" class="mt-6 space-y-4">
-                        {% for u in updates %}
-                        <div class="border rounded-xl p-5 {% if not u.read %}bg-brand-50/40 border-brand-200{% else %}bg-white border-slate-200 opacity-90{% endif %}">
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="text-xs font-semibold px-2 py-0.5 rounded {% if u.impact_level == 'Visok' %}bg-red-100 text-red-700{% elif u.impact_level == 'Srednji' %}bg-amber-100 text-amber-700{% else %}bg-blue-100 text-blue-700{% endif %}">
-                                    {{ u.impact_level }} Utjecaj
-                                </span>
-                                <span class="text-xs text-slate-400 font-mono">{{ u.date }}</span>
-                            </div>
-                            <h3 class="font-bold text-slate-900 text-base mb-1">{{ u.title }}{% if u.id in ['EDPB-2026-03', 'EDPB-2026-02', 'AZOP-2026-01'] %} <span class="sample-label">DEMO OBJAVA</span>{% endif %}</h3>
-                            <p class="text-xs text-slate-600 leading-relaxed mb-3">{{ u.summary }}</p>
-                            <div class="flex items-center justify-between text-xs pt-2 border-t border-slate-100">
-                                <span class="text-slate-400"><i class="fa-solid fa-landmark mr-1"></i> {{ u.source }}</span>
-                                <div class="flex items-center gap-3">
-                                    <a href="{{ u.url }}" target="_blank" class="text-brand-600 hover:underline font-semibold flex items-center gap-1">
-                                        Izvor <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                                    </a>
-                                    {% if not u.read %}
-                                    <button onclick="markAsRead('{{ u.id }}', this)" class="text-slate-400 hover:text-slate-600 font-medium cursor-pointer">Označi pročitanim</button>
-                                    {% endif %}
-                                </div>
-                            </div>
+
+                    <div class="flex items-center justify-between p-2 rounded-lg bg-slate-900/80 border border-slate-800">
+                        <div>
+                            <div class="font-medium text-slate-200">privatnost.pdf & dpa.pdf</div>
+                            <div class="text-[11px] text-slate-400">Pravila privatnosti i DPA ugovor</div>
                         </div>
-                        {% endfor %}
+                        <div class="flex items-center gap-1.5">
+                            <button type="button" onclick="window.SentinelApp.openPdfPreview('privatnost')" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-sky-300 cursor-pointer">Privatnost</button>
+                            <button type="button" onclick="window.SentinelApp.openPdfPreview('dpa')" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-sky-300 cursor-pointer">DPA</button>
+                        </div>
                     </div>
                 </div>
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 lg:p-8 h-fit">
-                    <h2 class="text-lg font-bold text-slate-900 mb-2">Postavke Obavijesti</h2>
-                    <p class="text-xs text-slate-500 mb-6">Prilagodite način i učestalost praćenja promjena u propisima.</p>
-                    <form id="regSettingsForm" onsubmit="saveRegulatorySettings(event)" class="space-y-4">
-                        <div>
-                            <label for="reg_frequency" class="block text-xs font-semibold text-slate-600 uppercase mb-1">Učestalost Provjere</label>
-                            <select id="reg_frequency" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
-                                <option value="hourly" {% if settings.check_frequency == 'hourly' %}selected{% endif %}>Svakih sat vremena</option>
-                                <option value="daily" {% if settings.check_frequency == 'daily' %}selected{% endif %}>Dnevno (jednom u 24h)</option>
-                                <option value="weekly" {% if settings.check_frequency == 'weekly' %}selected{% endif %}>Tjedno</option>
-                                <option value="monthly" {% if settings.check_frequency == 'monthly' %}selected{% endif %}>Mjesečno</option>
-                            </select>
+            </div>
+        </aside>
+
+        <!-- DESNA KOLONA: GLAVNI FORENZIČKI PRIKAZ ODABRANE DOMENE (9 kolona) -->
+        <section class="lg:col-span-9 space-y-6">
+
+            <!-- ZAGLAVLJE AKTIVNE DOMENE + KPI KARTICE -->
+            <div class="glass-panel rounded-2xl p-5 border border-slate-800/90">
+                <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-slate-800/80">
+                    <div>
+                        <div class="flex items-center gap-3">
+                            <h1 id="active-domain-title" class="text-2xl font-bold text-white tracking-tight">—</h1>
+                            <span id="active-risk-badge" class="text-xs font-mono uppercase px-2.5 py-1 rounded-full bg-slate-800 text-slate-300">
+                                UČITAVANJE
+                            </span>
                         </div>
-                        <div>
-                            <label for="reg_type" class="block text-xs font-semibold text-slate-600 uppercase mb-1">Kanal Obavještavanja</label>
-                            <select id="reg_type" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
-                                <option value="in_app" {% if settings.notification_type == 'in_app' %}selected{% endif %}>Samo unutar aplikacije (In-App)</option>
-                                <option disabled value="email" {% if settings.notification_type == 'email' %}selected{% endif %}>E-pošta (nije konfigurirano)</option>
-                                <option disabled value="both" {% if settings.notification_type == 'both' %}selected{% endif %}>In-App i E-pošta (e-pošta nije konfigurirana)</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="reg_email" class="block text-xs font-semibold text-slate-600 uppercase mb-1">E-mail za obavijesti</label>
-                            <input type="email" id="reg_email" value="{{ settings.notification_email }}" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
-                        </div>
-                        <div class="flex items-center gap-3 pt-2">
-                            <input type="checkbox" id="reg_active" {% if settings.is_active %}checked{% endif %} class="h-4 w-4 text-brand-600 rounded border-slate-300 focus:ring-brand-500">
-                            <label for="reg_active" class="text-sm font-medium text-slate-700">Aktivno automatsko praćenje</label>
-                        </div>
-                        <button type="submit" class="w-full mt-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-medium text-sm rounded-xl shadow-sm transition cursor-pointer">
-                            Spremi Postavke Monitora
+                        <p id="active-scan-meta" class="text-xs text-slate-400 mt-1">
+                            Odaberite domenu s lijeve strane ili pokrenite novo skeniranje.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button
+                            id="btn-rescan-active"
+                            type="button"
+                            class="px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium flex items-center gap-1.5 transition cursor-pointer"
+                        >
+                            <i data-lucide="rotate-cw" class="w-3.5 h-3.5 text-sky-400"></i>
+                            <span>Ponovno skeniraj ovu domenu</span>
                         </button>
-                    </form>
+                        <button
+                            type="button"
+                            onclick="window.SentinelApp.openPdfPreview('pregled')"
+                            class="px-3.5 py-2 rounded-lg bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/40 text-sky-200 text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer"
+                        >
+                            <i data-lucide="eye" class="w-3.5 h-3.5 text-sky-400"></i>
+                            <span>Pregledaj PDF izvještaj</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 4 KPI KARTICE -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mt-5">
+                    <div class="p-4 rounded-xl bg-slate-900/85 border border-slate-800/90">
+                        <div class="flex items-center justify-between text-xs text-slate-400">
+                            <span>GDPR Ocjena usklađenosti</span>
+                            <i data-lucide="gauge" class="w-4 h-4 text-sky-400"></i>
+                        </div>
+                        <div id="kpi-score" class="text-2xl font-bold text-white mt-2">— / 100</div>
+                        <div id="kpi-ssl-status" class="text-[11px] text-slate-400 mt-1">TLS/SSL status: —</div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-slate-900/85 border border-slate-800/90">
+                        <div class="flex items-center justify-between text-xs text-slate-400">
+                            <span>Pre-Consent Kolačići (Prekršaji)</span>
+                            <i data-lucide="cookie" class="w-4 h-4 text-rose-400"></i>
+                        </div>
+                        <div id="kpi-preconsent-cookies" class="text-2xl font-bold text-rose-400 mt-2">0</div>
+                        <div id="kpi-total-cookies" class="text-[11px] text-slate-400 mt-1">Ukupno detektiranih kolačića: 0</div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-slate-900/85 border border-slate-800/90">
+                        <div class="flex items-center justify-between text-xs text-slate-400">
+                            <span>Otkrivene Podstranice (Crawler)</span>
+                            <i data-lucide="git-Fork" class="w-4 h-4 text-sky-400"></i>
+                        </div>
+                        <div id="kpi-pages-count" class="text-2xl font-bold text-sky-300 mt-2">0</div>
+                        <div id="kpi-legal-coverage" class="text-[11px] text-slate-400 mt-1">Pravne rute: —</div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-slate-900/85 border border-slate-800/90">
+                        <div class="flex items-center justify-between text-xs text-slate-400">
+                            <span>Trackeri i ROPA Aktivnosti</span>
+                            <i data-lucide="shield-alert" class="w-4 h-4 text-amber-400"></i>
+                        </div>
+                        <div id="kpi-trackers-count" class="text-2xl font-bold text-amber-300 mt-2">0</div>
+                        <div id="kpi-cmp-status" class="text-[11px] text-slate-400 mt-1">CMP Banner: —</div>
+                    </div>
                 </div>
             </div>
+
+            <!-- NAVIGACIJSKE KARTICE (TABS) -->
+            <div class="flex flex-wrap items-center gap-2 border-b border-slate-800 pb-3">
+                <button
+                    type="button"
+                    data-tab="tab-cookies"
+                    class="tab-btn active-tab px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition cursor-pointer"
+                >
+                    <i data-lucide="cookie" class="w-4 h-4"></i>
+                    <span>1. Tablica Pre-Consent Kolačića</span>
+                    <span id="badge-tab-cookies" class="px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 font-mono text-[10px]">0</span>
+                </button>
+
+                <button
+                    type="button"
+                    data-tab="tab-subpages"
+                    class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition cursor-pointer"
+                >
+                    <i data-lucide="network" class="w-4 h-4"></i>
+                    <span>2. Stablo i Popis Otkrivenih Podstranica</span>
+                    <span id="badge-tab-subpages" class="px-1.5 py-0.5 rounded bg-sky-500/20 text-sky-300 font-mono text-[10px]">0</span>
+                </button>
+
+                <button
+                    type="button"
+                    data-tab="tab-ropa"
+                    class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition cursor-pointer"
+                >
+                    <i data-lucide="clipboard-list" class="w-4 h-4"></i>
+                    <span>3. ROPA Evidencija, Trackeri i Nesukladnosti</span>
+                    <span id="badge-tab-ropa" class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono text-[10px]">0</span>
+                </button>
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- TAB 1: INTERAKTIVNA TABLICA PRE-CONSENT KOLAČIĆA              -->
+            <!-- ============================================================ -->
+            <div id="tab-cookies" class="tab-pane space-y-4">
+                <div class="glass-panel rounded-2xl p-5 border border-slate-800/90">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                        <div>
+                            <h2 class="text-base font-bold text-white flex items-center gap-2">
+                                <i data-lucide="shield-alert" class="w-4 h-4 text-rose-400"></i>
+                                <span>Forenzička tablica Pre-Consent i aktivnih kolačića</span>
+                            </h2>
+                            <p class="text-xs text-slate-400 mt-0.5">
+                                Kolačići označeni s <span class="text-rose-400 font-semibold">PREKRŠAJ (Prije privole)</span> postavljeni su pri samom učitavanju domene bez privole korisnika (Čl. 6. st. 1. (a) GDPR-a) i automatski se ispisuju u <code class="text-sky-300">pregled.pdf</code>, <code class="text-sky-300">kolacici.pdf</code> i <code class="text-sky-300">ropa.pdf</code>.
+                            </p>
+                        </div>
+
+                        <!-- Filtri kategorija kolačića -->
+                        <div class="flex flex-wrap items-center gap-1.5">
+                            <button type="button" data-cookie-filter="all" class="cookie-filter-btn active-filter px-3 py-1.5 rounded-lg text-xs font-medium cursor-pointer">
+                                Svi kolačići
+                            </button>
+                            <button type="button" data-cookie-filter="violations" class="cookie-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium cursor-pointer">
+                                Samo Pre-Consent Prekršaji
+                            </button>
+                            <button type="button" data-cookie-filter="Nužni" class="cookie-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium cursor-pointer">
+                                Nužni
+                            </button>
+                            <button type="button" data-cookie-filter="non-essential" class="cookie-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium cursor-pointer">
+                                Analitički / Marketinški
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto rounded-xl border border-slate-800">
+                        <table class="w-full text-left border-collapse text-xs">
+                            <thead>
+                                <tr class="bg-slate-900/95 text-slate-300 border-b border-slate-800 uppercase text-[11px] tracking-wider">
+                                    <th class="py-3 px-3.5">Naziv kolačića</th>
+                                    <th class="py-3 px-3.5">Kategorija</th>
+                                    <th class="py-3 px-3.5">Pre-Consent Status</th>
+                                    <th class="py-3 px-3.5">Sigurnosne zastavice</th>
+                                    <th class="py-3 px-3.5">Trajanje</th>
+                                    <th class="py-3 px-3.5">Otkriven na podstranici</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cookies-table-body" class="divide-y divide-slate-800/70 bg-slate-950/40">
+                                <!-- Dinamički popunjava static/app.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- TAB 2: STABLO I TABLICA OTKRIVENIH PODSTRANICA               -->
+            <!-- ============================================================ -->
+            <div id="tab-subpages" class="tab-pane hidden space-y-5">
+
+                <!-- Pokrivenost ključnih pravnih podstranica -->
+                <div class="glass-panel rounded-2xl p-5 border border-slate-800/90">
+                    <h3 class="text-sm font-bold text-white mb-3 flex items-center gap-2">
+                        <i data-lucide="scale" class="w-4 h-4 text-sky-400"></i>
+                        <span>Detektirane obvezne pravne podstranice (Čl. 12. - 14. GDPR)</span>
+                    </h3>
+                    <div id="legal-pages-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                        <!-- Dinamički popunjava static/app.js -->
+                    </div>
+                </div>
+
+                <!-- Vizualno hijerarhijsko stablo otkrivenih podstranica po dubini (Depth 0 -> 1 -> 2) -->
+                <div class="glass-panel rounded-2xl p-5 border border-slate-800/90">
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                        <div>
+                            <h2 class="text-base font-bold text-white flex items-center gap-2">
+                                <i data-lucide="git-branch" class="w-4 h-4 text-sky-400"></i>
+                                <span>Interaktivno stablo otkrivenih podstranica (Topologija domene)</span>
+                            </h2>
+                            <p class="text-xs text-slate-400 mt-0.5">
+                                Vizualni prikaz kako je BFS crawler otkrio podstranice po razinama dubine (<code class="text-sky-300">Dubina 0</code> korijen &rarr; <code class="text-sky-300">Dubina 1</code> &rarr; <code class="text-sky-300">Dubina 2</code>).
+                            </p>
+                        </div>
+
+                        <div class="relative w-64">
+                            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2"></i>
+                            <input
+                                id="subpages-search-input"
+                                type="text"
+                                placeholder="Pretraži URL ili pravnu ulogu..."
+                                class="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg bg-slate-900 border border-slate-700 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-sky-400"
+                            />
+                        </div>
+                    </div>
+
+                    <!-- Stablo podstranica -->
+                    <div id="subpages-tree-container" class="space-y-3 mb-6">
+                        <!-- Dinamički popunjava static/app.js -->
+                    </div>
+
+                    <!-- Strukturirana tablica podstranica (identična tablici u PDF izvještajima) -->
+                    <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2.5">
+                        Tablični pregled otkrivenih podstranica (ispisuje se u pregled.pdf, kolacici.pdf i ropa.pdf)
+                    </h3>
+                    <div class="overflow-x-auto rounded-xl border border-slate-800">
+                        <table class="w-full text-left border-collapse text-xs">
+                            <thead>
+                                <tr class="bg-slate-900/95 text-slate-300 border-b border-slate-800 uppercase text-[11px] tracking-wider">
+                                    <th class="py-3 px-3">#</th>
+                                    <th class="py-3 px-3.5">URL otkrivene podstranice</th>
+                                    <th class="py-3 px-3">Pravna uloga</th>
+                                    <th class="py-3 px-3">HTTP Status</th>
+                                    <th class="py-3 px-3">Dubina</th>
+                                    <th class="py-3 px-3">Kolačići</th>
+                                    <th class="py-3 px-3">Web Obrasci</th>
+                                </tr>
+                            </thead>
+                            <tbody id="subpages-table-body" class="divide-y divide-slate-800/70 bg-slate-950/40">
+                                <!-- Dinamički popunjava static/app.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- TAB 3: ROPA EVIDENCIJA, TRACKERI I UTVRĐENE NESUKLADNOSTI    -->
+            <!-- ============================================================ -->
+            <div id="tab-ropa" class="tab-pane hidden space-y-5">
+                <!-- ROPA Tablica (Članak 30. GDPR) -->
+                <div class="glass-panel rounded-2xl p-5 border border-slate-800/90">
+                    <h2 class="text-base font-bold text-white mb-1 flex items-center gap-2">
+                        <i data-lucide="file-spreadsheet" class="w-4 h-4 text-sky-400"></i>
+                        <span>ROPA — Evidencija aktivnosti obrade (Članak 30. GDPR)</span>
+                    </h2>
+                    <p class="text-xs text-slate-400 mb-4">
+                        Automatski generiran registar aktivnosti obrade temeljem pronađenih kolačića, obrazaca i vanjskih skripti na podstranicama.
+                    </p>
+                    <div class="overflow-x-auto rounded-xl border border-slate-800">
+                        <table class="w-full text-left border-collapse text-xs">
+                            <thead>
+                                <tr class="bg-slate-900/95 text-slate-300 border-b border-slate-800 uppercase text-[11px] tracking-wider">
+                                    <th class="py-3 px-3">ID</th>
+                                    <th class="py-3 px-3.5">Aktivnost i svrha obrade</th>
+                                    <th class="py-3 px-3.5">Pravna osnova</th>
+                                    <th class="py-3 px-3.5">Kategorije podataka</th>
+                                    <th class="py-3 px-3.5">Primatelji / Treće zemlje</th>
+                                    <th class="py-3 px-3.5">Podstranice izvora</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ropa-table-body" class="divide-y divide-slate-800/70 bg-slate-950/40">
+                                <!-- Dinamički popunjava static/app.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Utvrđene nesukladnosti i preporuke -->
+                <div class="glass-panel rounded-2xl p-5 border border-slate-800/90">
+                    <h3 class="text-base font-bold text-white mb-3 flex items-center gap-2">
+                        <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400"></i>
+                        <span>Utvrđene GDPR nesukladnosti i tehnički nalazi</span>
+                    </h3>
+                    <div id="issues-list-container" class="space-y-2.5">
+                        <!-- Dinamički popunjava static/app.js -->
+                    </div>
+                </div>
+            </div>
+
         </section>
     </main>
-    <footer class="site-footer"><strong>GDPR Sentinel</strong><span>Privatnost počinje razumijevanjem.</span><span>Tehnička procjena · Dokumentacija · Pregled objava</span></footer>
-    <script src="/static/app.js" defer></script>
 
+    <!-- ==================================================================== -->
+    <!-- MODAL 1: INTERAKTIVNI PREGLEDNIK PDF IZVJEŠTAJA PRIJE PREUZIMANJA     -->
+    <!-- ==================================================================== -->
+    <div id="pdf-preview-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-[#0f172a] border border-slate-700 rounded-2xl w-full max-w-6xl h-[90vh] flex flex-col overflow-hidden shadow-2xl">
+            <div class="px-5 py-3.5 border-b border-slate-800 flex flex-wrap items-center justify-between gap-3 bg-slate-950/70">
+                <div class="flex items-center gap-2.5">
+                    <i data-lucide="file-check-2" class="w-5 h-5 text-sky-400"></i>
+                    <div>
+                        <h3 id="pdf-modal-title" class="text-sm font-bold text-white">Pregled PDF Izvještaja</h3>
+                        <p class="text-[11px] text-slate-400">Izravni prikaz generiranog dokumenta iz <code class="text-sky-300">output/pdf/</code></p>
+                    </div>
+                </div>
+
+                <!-- Brzo prebacivanje između 5 PDF dokumenata u modalu -->
+                <div class="flex flex-wrap items-center gap-1.5">
+                    <button type="button" onclick="window.SentinelApp.openPdfPreview('pregled')" class="px-2.5 py-1 rounded text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 cursor-pointer">pregled.pdf</button>
+                    <button type="button" onclick="window.SentinelApp.openPdfPreview('kolacici')" class="px-2.5 py-1 rounded text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 cursor-pointer">kolacici.pdf</button>
+                    <button type="button" onclick="window.SentinelApp.openPdfPreview('ropa')" class="px-2.5 py-1 rounded text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 cursor-pointer">ropa.pdf</button>
+                    <button type="button" onclick="window.SentinelApp.openPdfPreview('privatnost')" class="px-2.5 py-1 rounded text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 cursor-pointer">privatnost.pdf</button>
+                    <button type="button" onclick="window.SentinelApp.openPdfPreview('dpa')" class="px-2.5 py-1 rounded text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 cursor-pointer">dpa.pdf</button>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <a
+                        id="pdf-modal-download-btn"
+                        href="/output/pdf/pregled.pdf?download=1"
+                        class="px-3.5 py-1.5 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold text-xs flex items-center gap-1.5"
+                    >
+                        <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                        <span>Preuzmi PDF</span>
+                    </a>
+                    <button
+                        type="button"
+                        onclick="window.SentinelApp.closePdfPreview()"
+                        class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs cursor-pointer"
+                    >
+                        Zatvori ✕
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex-1 bg-slate-900">
+                <iframe id="pdf-preview-iframe" src="about:blank" class="w-full h-full border-0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================================================================== -->
+    <!-- MODAL 2: POSTAVKE VODITELJA OBRADE (data/company_profile.json)       -->
+    <!-- ==================================================================== -->
+    <div id="company-modal" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-[#0f172a] border border-slate-700 rounded-2xl w-full max-w-lg p-6 shadow-2xl">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+                <h3 class="text-base font-bold text-white">Podaci o voditelju obrade ( za ROPA i PDF-ove )</h3>
+                <button type="button" id="btn-close-company-modal" class="text-slate-400 hover:text-white cursor-pointer">✕</button>
+            </div>
+            <form id="company-form" class="space-y-3.5 mt-4 text-xs">
+                <div>
+                    <label class="block text-slate-300 mb-1">Naziv tvrtke / obrta (Voditelj obrade)</label>
+                    <input type="text" name="company_name" id="comp-name" value="{{ company_profile.get('company_name', '') }}" class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white" required />
+                </div>
+                <div>
+                    <label class="block text-slate-300 mb-1">Sjedište i adresa</label>
+                    <input type="text" name="address" id="comp-address" value="{{ company_profile.get('address', '') }}" class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white" />
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-slate-300 mb-1">OIB</label>
+                        <input type="text" name="oib" id="comp-oib" value="{{ company_profile.get('oib', '') }}" class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white" />
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 mb-1">Kontakt e-mail (DPO)</label>
+                        <input type="email" name="email" id="comp-email" value="{{ company_profile.get('email', '') }}" class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white" />
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-slate-300 mb-1">Ime službenika za zaštitu podataka</label>
+                        <input type="text" name="dpo_name" id="comp-dpo" value="{{ company_profile.get('dpo_name', '') }}" class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white" />
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 mb-1">Telefon</label>
+                        <input type="text" name="phone" id="comp-phone" value="{{ company_profile.get('phone', '') }}" class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white" />
+                    </div>
+                </div>
+                <div class="pt-3 flex justify-end gap-2">
+                    <button type="button" id="btn-cancel-company" class="px-4 py-2 rounded-lg bg-slate-800 text-slate-300 cursor-pointer">Odustani</button>
+                    <button type="submit" class="px-4 py-2 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold cursor-pointer">Spremi i osvježi PDF-ove</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- INICIJALNI PODACI IZ FLASK POSLUŽITELJA -->
+    <script id="initial-scans-json" type="application/json">
+        {{ initial_scans | tojson | safe }}
+    </script>
+    <script src="/static/app.js"></script>
 </body>
 </html>

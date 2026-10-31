@@ -1,0 +1,18 @@
+{
+  "total_domains_scanned": 1,
+  "average_score": 86.0,
+  "domains": [
+    {
+      "scan_id": "a8ffde08",
+      "domain": "beat-battle-royale.com",
+      "score": 86,
+      "risk_level": "LOW",
+      "pages_crawled": 11,
+      "cookies_found": 0,
+      "trackers_found": [],
+      "has_privacy_policy": true,
+      "has_cookie_banner": false,
+      "issues_count": 3
+    }
+  ]
+}

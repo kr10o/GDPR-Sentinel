@@ -1,0 +1,511 @@
+{
+  "id": "7026e50f",
+  "scan_id": "7026e50f",
+  "domain": "autoskola-gazela.hr",
+  "url": "https://autoskola-gazela.hr/",
+  "timestamp": "2026-10-31T04:15:16.550759+00:00",
+  "scan_date": "2026-10-31 05:15:23",
+  "duration_seconds": 6.86,
+  "status": "completed",
+  "pages_scanned_count": 9,
+  "crawled_pages": [
+    {
+      "url": "https://autoskola-gazela.hr/",
+      "status_code": 200,
+      "title": "Naslovnica » Autoškola Gazela Kutina",
+      "cookies_set": 0,
+      "forms_count": 2,
+      "depth": 0
+    },
+    {
+      "url": "https://autoskola-gazela.hr/multimedija/",
+      "status_code": 200,
+      "title": "Multimedija » Autoškola Gazela Kutina",
+      "cookies_set": 0,
+      "forms_count": 0,
+      "depth": 1
+    },
+    {
+      "url": "https://autoskola-gazela.hr/program-vozackog-ispita/",
+      "status_code": 200,
+      "title": "Program vozačkog ispita » Autoškola Gazela Kutina",
+      "cookies_set": 0,
+      "forms_count": 0,
+      "depth": 1
+    },
+    {
+      "url": "https://autoskola-gazela.hr/vozila-i-instruktori/",
+      "status_code": 200,
+      "title": "Vozila i instruktori » Autoškola Gazela Kutina",
+      "cookies_set": 0,
+      "forms_count": 0,
+      "depth": 1
+    },
+    {
+      "url": "https://autoskola-gazela.hr/ponuda-2/",
+      "status_code": 200,
+      "title": "Ponuda » Autoškola Gazela Kutina",
+      "cookies_set": 0,
+      "forms_count": 0,
+      "depth": 1
+    },
+    {
+      "url": "https://autoskola-gazela.hr/najcesca-pitanja/",
+      "status_code": 200,
+      "title": "Najčešća pitanja » Autoškola Gazela Kutina",
+      "cookies_set": 0,
+      "forms_count": 0,
+      "depth": 1
+    },
+    {
+      "url": "https://autoskola-gazela.hr/upis/",
+      "status_code": 200,
+      "title": "Upis » Autoškola Gazela Kutina",
+      "cookies_set": 0,
+      "forms_count": 1,
+      "depth": 1
+    },
+    {
+      "url": "https://autoskola-gazela.hr",
+      "status_code": 200,
+      "title": "Naslovnica » Autoškola Gazela Kutina",
+      "cookies_set": 0,
+      "forms_count": 2,
+      "depth": 1
+    },
+    {
+      "url": "https://autoskola-gazela.hr/kontakt/",
+      "status_code": 200,
+      "title": "Kontakt » Autoškola Gazela Kutina",
+      "cookies_set": 0,
+      "forms_count": 1,
+      "depth": 1
+    }
+  ],
+  "score": 37,
+  "compliance_score": 37,
+  "risk_level": "HIGH",
+  "https": true,
+  "ssl_valid": true,
+  "http_to_https_redirect": true,
+  "has_cookie_banner": false,
+  "has_privacy_policy": false,
+  "has_cookie_policy": false,
+  "has_terms_of_service": true,
+  "has_dpo_contact": false,
+  "legal_pages": {
+    "privacy_policy": null,
+    "cookie_policy": null,
+    "terms_of_service": "https://autoskola-gazela.hr/",
+    "dpa_imprint_contact": "https://autoskola-gazela.hr/kontakt"
+  },
+  "cmp_details": {
+    "has_cookie_banner": false,
+    "detected_cmp_platforms": [],
+    "google_consent_mode_v2": false,
+    "iab_tcf_v2_detected": false,
+    "has_accept_button": false,
+    "has_equal_reject_button": false,
+    "dark_pattern_suspected": false
+  },
+  "network_and_tls": {
+    "domain": "autoskola-gazela.hr",
+    "ip_address": "88.99.167.187",
+    "reverse_dns": "server10.euronet.com.hr",
+    "is_eu_ip_heuristic": true,
+    "ssl_valid": true,
+    "ssl_issuer": "Let's Encrypt",
+    "ssl_subject": "autoskola-gazela.hr",
+    "ssl_version": "TLSv1.3",
+    "ssl_cipher": "TLS_AES_256_GCM_SHA384",
+    "ssl_expires": "2026-12-14T19:08:58+00:00",
+    "ssl_days_remaining": 44,
+    "errors": []
+  },
+  "security_headers": {
+    "headers": {
+      "strict-transport-security": {
+        "present": false,
+        "value": null,
+        "gdpr_relevance": "Čl. 32 GDPR - Enkripcija u prijenosu (HSTS)"
+      },
+      "content-security-policy": {
+        "present": false,
+        "value": null,
+        "gdpr_relevance": "Čl. 32 GDPR - Sprječavanje neovlaštenog ubacivanja skripti i curenja podataka (CSP)"
+      },
+      "x-content-type-options": {
+        "present": false,
+        "value": null,
+        "gdpr_relevance": "Zaštita od MIME-sniffing napada"
+      },
+      "x-frame-options": {
+        "present": false,
+        "value": null,
+        "gdpr_relevance": "Zaštita od Clickjacking prijevara pri davanju privole"
+      },
+      "referrer-policy": {
+        "present": false,
+        "value": null,
+        "gdpr_relevance": "Sprječavanje curenja URL parametara trećim stranama"
+      },
+      "permissions-policy": {
+        "present": false,
+        "value": null,
+        "gdpr_relevance": "Ograničavanje pristupa kameri, mikrofonu i geolokaciji"
+      }
+    },
+    "present_count": 0,
+    "total_checked": 6,
+    "score_pct": 0.0
+  },
+  "cookies": [],
+  "cookies_count": 0,
+  "non_essential_preconsent_cookies": [],
+  "trackers": [],
+  "trackers_detected": [],
+  "third_party_domains": [
+    "www.google.com"
+  ],
+  "us_data_transfer_detected": false,
+  "dpa_processors_required": [],
+  "forms": [
+    {
+      "page_url": "https://autoskola-gazela.hr/",
+      "action": "https://autoskola-gazela.hr/",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "_hf_h1824 (text)",
+        "NAME (text)",
+        "NAME2 (text)",
+        "DATUM (date)",
+        "MJESTO (text)",
+        "ADRESA (text)",
+        "OIB (text)",
+        "telefon (number)",
+        "uvjerenje (number)",
+        "DATUM-2 (date)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "NAIN_PLAANJA (radio)",
+        "NAIN_PLAANJA (radio)",
+        "NAIN_PLAANJA (radio)",
+        "Vaša poruka (text)"
+      ],
+      "collects_pii": true,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "MEDIUM",
+      "issues": [
+        "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR)."
+      ]
+    },
+    {
+      "page_url": "https://autoskola-gazela.hr/",
+      "action": "https://autoskola-gazela.hr/",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "_hf_h1824 (text)",
+        "NAME (text)",
+        "NAME2 (text)",
+        "DATUM (date)",
+        "MJESTO (text)",
+        "ADRESA (text)",
+        "OIB (text)",
+        "telefon (number)",
+        "uvjerenje (number)",
+        "DATUM-2 (date)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "NAIN_PLAANJA (radio)",
+        "NAIN_PLAANJA (radio)",
+        "NAIN_PLAANJA (radio)",
+        "Vaša poruka (text)"
+      ],
+      "collects_pii": true,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "MEDIUM",
+      "issues": [
+        "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR)."
+      ]
+    },
+    {
+      "page_url": "https://autoskola-gazela.hr/upis/",
+      "action": "https://autoskola-gazela.hr/upis/",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "_hf_h1824 (text)",
+        "NAME (text)",
+        "NAME2 (text)",
+        "DATUM (date)",
+        "MJESTO (text)",
+        "ADRESA (text)",
+        "OIB (text)",
+        "telefon (number)",
+        "uvjerenje (number)",
+        "DATUM-2 (date)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "NAIN_PLAANJA (radio)",
+        "NAIN_PLAANJA (radio)",
+        "NAIN_PLAANJA (radio)",
+        "Vaša poruka (text)"
+      ],
+      "collects_pii": true,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "MEDIUM",
+      "issues": [
+        "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR)."
+      ]
+    },
+    {
+      "page_url": "https://autoskola-gazela.hr",
+      "action": "https://autoskola-gazela.hr",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "_hf_h1824 (text)",
+        "NAME (text)",
+        "NAME2 (text)",
+        "DATUM (date)",
+        "MJESTO (text)",
+        "ADRESA (text)",
+        "OIB (text)",
+        "telefon (number)",
+        "uvjerenje (number)",
+        "DATUM-2 (date)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "NAIN_PLAANJA (radio)",
+        "NAIN_PLAANJA (radio)",
+        "NAIN_PLAANJA (radio)",
+        "Vaša poruka (text)"
+      ],
+      "collects_pii": true,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "MEDIUM",
+      "issues": [
+        "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR)."
+      ]
+    },
+    {
+      "page_url": "https://autoskola-gazela.hr",
+      "action": "https://autoskola-gazela.hr",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "_hf_h1824 (text)",
+        "NAME (text)",
+        "NAME2 (text)",
+        "DATUM (date)",
+        "MJESTO (text)",
+        "ADRESA (text)",
+        "OIB (text)",
+        "telefon (number)",
+        "uvjerenje (number)",
+        "DATUM-2 (date)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "KATEGORIJA (radio)",
+        "NAIN_PLAANJA (radio)",
+        "NAIN_PLAANJA (radio)",
+        "NAIN_PLAANJA (radio)",
+        "Vaša poruka (text)"
+      ],
+      "collects_pii": true,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "MEDIUM",
+      "issues": [
+        "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR)."
+      ]
+    },
+    {
+      "page_url": "https://autoskola-gazela.hr/kontakt/",
+      "action": "https://autoskola-gazela.hr/kontakt/",
+      "method": "POST",
+      "is_secure_action": true,
+      "fields_detected": [
+        "_hf_h1833 (text)",
+        "name (text)",
+        "email (email)",
+        "message (text)"
+      ],
+      "collects_pii": true,
+      "has_prechecked_consent": false,
+      "has_consent_checkbox": false,
+      "has_privacy_link_nearby": false,
+      "risk_level": "MEDIUM",
+      "issues": [
+        "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR)."
+      ]
+    }
+  ],
+  "forms_count": 6,
+  "contact_and_dpo": {
+    "emails_found": [],
+    "dpo_Contact_detected": false,
+    "dpo_emails": [],
+    "oib_candidates": [],
+    "mentions_azop_supervisory_authority": false,
+    "mentions_data_subject_rights": false
+  },
+  "headless_browser_used": false,
+  "local_storage_keys": [],
+  "issues": [
+    {
+      "severity": "CRITICAL",
+      "title": "Nedostaju Pravila privatnosti (Privacy Policy)",
+      "description": "Crawler nije pronašao javno dostupnu poveznicu na Pravila privatnosti na skeniranim stranicama.",
+      "gdpr_article": "Članak 12., 13. i 14. GDPR",
+      "penalty_points": "22"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Neusklađen web obrazac na https://autoskola-gazela.hr/",
+      "description": "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR).",
+      "gdpr_article": "Članak 7., 13., 25. i 32. GDPR",
+      "penalty_points": "6"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Neusklađen web obrazac na https://autoskola-gazela.hr/",
+      "description": "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR).",
+      "gdpr_article": "Članak 7., 13., 25. i 32. GDPR",
+      "penalty_points": "6"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Neusklađen web obrazac na https://autoskola-gazela.hr/upis/",
+      "description": "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR).",
+      "gdpr_article": "Članak 7., 13., 25. i 32. GDPR",
+      "penalty_points": "6"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Neusklađen web obrazac na https://autoskola-gazela.hr",
+      "description": "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR).",
+      "gdpr_article": "Članak 7., 13., 25. i 32. GDPR",
+      "penalty_points": "6"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Neusklađen web obrazac na https://autoskola-gazela.hr",
+      "description": "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR).",
+      "gdpr_article": "Članak 7., 13., 25. i 32. GDPR",
+      "penalty_points": "6"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Neusklađen web obrazac na https://autoskola-gazela.hr/kontakt/",
+      "description": "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR).",
+      "gdpr_article": "Članak 7., 13., 25. i 32. GDPR",
+      "penalty_points": "6"
+    },
+    {
+      "severity": "LOW",
+      "title": "Nedostaju sigurnosna HTTP zaglavlja (0/6)",
+      "description": "Poslužitelj ne šalje preporučena zaglavlja (CSP, HSTS, X-Frame-Options, Referrer-Policy).",
+      "gdpr_article": "Članak 32. GDPR (Tehničke i organizacijske mjere)",
+      "penalty_points": "5"
+    }
+  ],
+  "findings": [
+    {
+      "severity": "CRITICAL",
+      "title": "Nedostaju Pravila privatnosti (Privacy Policy)",
+      "description": "Crawler nije pronašao javno dostupnu poveznicu na Pravila privatnosti na skeniranim stranicama.",
+      "gdpr_article": "Članak 12., 13. i 14. GDPR",
+      "penalty_points": "22"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Neusklađen web obrazac na https://autoskola-gazela.hr/",
+      "description": "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR).",
+      "gdpr_article": "Članak 7., 13., 25. i 32. GDPR",
+      "penalty_points": "6"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Neusklađen web obrazac na https://autoskola-gazela.hr/",
+      "description": "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR).",
+      "gdpr_article": "Članak 7., 13., 25. i 32. GDPR",
+      "penalty_points": "6"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Neusklađen web obrazac na https://autoskola-gazela.hr/upis/",
+      "description": "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR).",
+      "gdpr_article": "Članak 7., 13., 25. i 32. GDPR",
+      "penalty_points": "6"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Neusklađen web obrazac na https://autoskola-gazela.hr",
+      "description": "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR).",
+      "gdpr_article": "Članak 7., 13., 25. i 32. GDPR",
+      "penalty_points": "6"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Neusklađen web obrazac na https://autoskola-gazela.hr",
+      "description": "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR).",
+      "gdpr_article": "Članak 7., 13., 25. i 32. GDPR",
+      "penalty_points": "6"
+    },
+    {
+      "severity": "MEDIUM",
+      "title": "Neusklađen web obrazac na https://autoskola-gazela.hr/kontakt/",
+      "description": "Obrazac prikuplja osobne podatke bez vidljive obavijesti ili poveznice na Pravila privatnosti (Čl. 13 GDPR).",
+      "gdpr_article": "Članak 7., 13., 25. i 32. GDPR",
+      "penalty_points": "6"
+    },
+    {
+      "severity": "LOW",
+      "title": "Nedostaju sigurnosna HTTP zaglavlja (0/6)",
+      "description": "Poslužitelj ne šalje preporučena zaglavlja (CSP, HSTS, X-Frame-Options, Referrer-Policy).",
+      "gdpr_article": "Članak 32. GDPR (Tehničke i organizacijske mjere)",
+      "penalty_points": "5"
+    }
+  ],
+  "recommendations": [
+    "Generirajte i objavite Pravila privatnosti putem GDPR Sentinel generatora te postavite poveznicu u podnožje (footer).",
+    "Uklonite unaprijed označene privole, koristite HTTPS POST metodu i dodajte poveznicu na Pravila privatnosti ispod obrasca.",
+    "Postavite Content-Security-Policy, Strict-Transport-Security i Referrer-Policy: strict-origin-when-cross-origin."
+  ]
+}
