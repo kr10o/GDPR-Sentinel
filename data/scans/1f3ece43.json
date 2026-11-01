@@ -1,0 +1,169 @@
+{
+  "id": "1f3ece43",
+  "scan_id": "1f3ece43",
+  "domain": "beat-battle-royale.com",
+  "url": "https://beat-battle-royale.com/",
+  "timestamp": "2026-11-01T04:34:40.580560+00:00",
+  "scan_date": "2026-11-01 05:34:46",
+  "duration_seconds": 5.53,
+  "status": "completed",
+  "pages_scanned_count": 1,
+  "crawled_pages": [
+    {
+      "url": "https://beat-battle-royale.com/",
+      "status_code": 200,
+      "title": "Beat Battle Royale — Studio & Ranked",
+      "cookies_set": 0,
+      "forms_count": 0,
+      "depth": 0
+    }
+  ],
+  "score": 68,
+  "compliance_score": 68,
+  "risk_level": "MEDIUM",
+  "https": true,
+  "ssl_valid": true,
+  "http_to_https_redirect": false,
+  "has_cookie_banner": false,
+  "has_privacy_policy": false,
+  "has_cookie_policy": false,
+  "has_terms_of_service": false,
+  "has_dpo_contact": false,
+  "legal_pages": {
+    "privacy_policy": null,
+    "cookie_policy": null,
+    "terms_of_service": null,
+    "dpa_imprint_contact": null
+  },
+  "cmp_details": {
+    "has_cookie_banner": false,
+    "detected_cmp_platforms": [],
+    "google_consent_mode_v2": false,
+    "iab_tcf_v2_detected": false,
+    "has_accept_button": false,
+    "has_equal_reject_button": false,
+    "dark_pattern_suspected": false
+  },
+  "network_and_tls": {
+    "domain": "beat-battle-royale.com",
+    "ip_address": "172.67.152.201",
+    "reverse_dns": null,
+    "is_eu_ip_heuristic": true,
+    "ssl_valid": true,
+    "ssl_issuer": "Google Trust Services",
+    "ssl_subject": "beat-battle-royale.com",
+    "ssl_version": "TLSv1.3",
+    "ssl_cipher": "TLS_AES_256_GCM_SHA384",
+    "ssl_expires": "2026-12-25T10:14:26+00:00",
+    "ssl_days_remaining": 54,
+    "errors": []
+  },
+  "security_headers": {
+    "headers": {
+      "strict-transport-security": {
+        "present": false,
+        "value": null,
+        "gdpr_relevance": "Čl. 32 GDPR - Enkripcija u prijenosu (HSTS)"
+      },
+      "content-security-policy": {
+        "present": true,
+        "value": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' wss://beat-battle-royale.com https://raw.githubusercontent.com https://cdn.freesound.org; media-src 'self' blob: https://cdn.freesound.org; worker-src 'self' blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'",
+        "gdpr_relevance": "Čl. 32 GDPR - Sprječavanje neovlaštenog ubacivanja skripti i curenja podataka (CSP)"
+      },
+      "x-content-type-options": {
+        "present": false,
+        "value": null,
+        "gdpr_relevance": "Zaštita od MIME-sniffing napada"
+      },
+      "x-frame-options": {
+        "present": false,
+        "value": null,
+        "gdpr_relevance": "Zaštita od Clickjacking prijevara pri davanju privole"
+      },
+      "referrer-policy": {
+        "present": true,
+        "value": "no-referrer",
+        "gdpr_relevance": "Sprječavanje curenja URL parametara trećim stranama"
+      },
+      "permissions-policy": {
+        "present": false,
+        "value": null,
+        "gdpr_relevance": "Ograničavanje pristupa kameri, mikrofonu i geolokaciji"
+      }
+    },
+    "present_count": 2,
+    "total_checked": 6,
+    "score_pct": 33.3
+  },
+  "cookies": [],
+  "cookies_count": 0,
+  "non_essential_preconsent_cookies": [],
+  "trackers": [],
+  "trackers_detected": [],
+  "third_party_domains": [],
+  "us_data_transfer_detected": false,
+  "dpa_processors_required": [],
+  "forms": [],
+  "forms_count": 0,
+  "contact_and_dpo": {
+    "emails_found": [],
+    "dpo_Contact_detected": false,
+    "dpo_emails": [],
+    "oib_candidates": [],
+    "mentions_azop_supervisory_authority": false,
+    "mentions_data_subject_rights": false
+  },
+  "headless_browser_used": false,
+  "local_storage_keys": [],
+  "issues": [
+    {
+      "severity": "MEDIUM",
+      "title": "Nedostaje automatsko HTTP -> HTTPS preusmjeravanje",
+      "description": "Posjetitelji koji pristupe putem http:// protokola nisu automatski preusmjereni na zaštićeni HTTPS.",
+      "gdpr_article": "Članak 32. GDPR",
+      "penalty_points": "5"
+    },
+    {
+      "severity": "CRITICAL",
+      "title": "Nedostaju Pravila privatnosti (Privacy Policy)",
+      "description": "Crawler nije pronašao javno dostupnu poveznicu na Pravila privatnosti na skeniranim stranicama.",
+      "gdpr_article": "Članak 12., 13. i 14. GDPR",
+      "penalty_points": "22"
+    },
+    {
+      "severity": "LOW",
+      "title": "Nedostaju sigurnosna HTTP zaglavlja (2/6)",
+      "description": "Poslužitelj ne šalje preporučena zaglavlja (CSP, HSTS, X-Frame-Options, Referrer-Policy).",
+      "gdpr_article": "Članak 32. GDPR (Tehničke i organizacijske mjere)",
+      "penalty_points": "5"
+    }
+  ],
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "title": "Nedostaje automatsko HTTP -> HTTPS preusmjeravanje",
+      "description": "Posjetitelji koji pristupe putem http:// protokola nisu automatski preusmjereni na zaštićeni HTTPS.",
+      "gdpr_article": "Članak 32. GDPR",
+      "penalty_points": "5"
+    },
+    {
+      "severity": "CRITICAL",
+      "title": "Nedostaju Pravila privatnosti (Privacy Policy)",
+      "description": "Crawler nije pronašao javno dostupnu poveznicu na Pravila privatnosti na skeniranim stranicama.",
+      "gdpr_article": "Članak 12., 13. i 14. GDPR",
+      "penalty_points": "22"
+    },
+    {
+      "severity": "LOW",
+      "title": "Nedostaju sigurnosna HTTP zaglavlja (2/6)",
+      "description": "Poslužitelj ne šalje preporučena zaglavlja (CSP, HSTS, X-Frame-Options, Referrer-Policy).",
+      "gdpr_article": "Članak 32. GDPR (Tehničke i organizacijske mjere)",
+      "penalty_points": "5"
+    }
+  ],
+  "recommendations": [
+    "Konfigurirajte 301 preusmjeravanje sa svih HTTP ruta na HTTPS na razini poslužitelja ili Cloudflare Edgea.",
+    "Generirajte i objavite Pravila privatnosti putem GDPR Sentinel generatora te postavite poveznicu u podnožje (footer).",
+    "Postavite Content-Security-Policy, Strict-Transport-Security i Referrer-Policy: strict-origin-when-cross-origin."
+  ]
+}
